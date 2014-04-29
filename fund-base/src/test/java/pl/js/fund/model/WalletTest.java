@@ -36,12 +36,8 @@ public class WalletTest
     @Test
     public void addRegister()
     {
-        Fund fund = new UnionInvestmentFund(FundName.UI_ANE);
 
-        Register register = new Register();
-        register.setFund(fund);
-
-        wallet.addRegister(register);
+        wallet.addRegister(FundName.UI_ANE);
 
         Assert.assertNotNull(wallet.getRegisters());
         Assert.assertEquals(1, wallet.getRegisters().keySet().size());
@@ -50,14 +46,9 @@ public class WalletTest
     @Test
     public void loadOperations()
     {
-        Register registerANE = new Register();
-        registerANE.setFund(new UnionInvestmentFund(FundName.UI_ANE));
 
-        Register registerP = new Register();
-        registerP.setFund(new UnionInvestmentFund(FundName.UI_P));
-
-        wallet.addRegister(registerANE);
-        wallet.addRegister(registerP);
+        wallet.addRegister(FundName.UI_ANE);
+        wallet.addRegister(FundName.UI_P);
 
         wallet.loadOperations(this.getClass().getResource("/operacje.txt").toString());
 
@@ -68,14 +59,6 @@ public class WalletTest
     @Test
     public void performOperations()
     {
-        /*
-         * Register registerANE = new Register();
-         * registerANE.setFund(new UnionInvestmentFund(FundName.UI_ANE));
-         * Register registerP = new Register();
-         * registerP.setFund(new UnionInvestmentFund(FundName.UI_P));
-         * wallet.addRegister(registerANE);
-         * wallet.addRegister(registerP);
-         */
         wallet.loadOperations(this.getClass().getResource("/operacje2.txt").toString());
         wallet.performOperations();
 

@@ -24,7 +24,7 @@ public class TextRegisterDecorator extends WalletDecorator {
 	private String logRegister(Register register) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(register.getFund().getName()).append(" ")
-				.append(register.getPriceProvider().getPrice(new LocalDate()))
+				.append(register.getPriceProvider().getPriceAtLastBusinessDay(new LocalDate()))
 				.append("PLN | ").append(register.getUnits()).append("u ")
 				.append(register.getValue(new LocalDate()));
 

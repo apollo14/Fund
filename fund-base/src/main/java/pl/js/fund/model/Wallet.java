@@ -42,9 +42,11 @@ public class Wallet implements IWallet
         return operations;
     }
 
-    public void addRegister(Register register)
+    public void addRegister(FundName fundName)
     {
-        this.registers.put(register.getFund().getName(), register);
+        Register register = new Register();
+        register.setFund(fundName.instantiate());
+        this.registers.put(fundName.getName(), register);
     }
 
     private void addRegister(String fundName)

@@ -68,7 +68,7 @@ public class PriceProviderTest
     {
         provider.setFund(fund);
 
-        Double price = provider.getPrice(new LocalDate(2014, 04, 14));
+        Double price = provider.getPriceAtLastBusinessDay(new LocalDate(2014, 04, 14));
 
         Assert.assertNotNull(price);
     }

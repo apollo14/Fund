@@ -43,7 +43,7 @@ public class TextOperationDecorator extends WalletDecorator
     {
         Register register = getRegisters().get(operation.getFundName());
         StringBuilder sb = new StringBuilder();
-        sb.append(register.getPriceProvider().getPrice(operation.getDate()))
+        sb.append(register.getPriceProvider().getPriceAtLastBusinessDay(operation.getDate()))
                 .append("PLN | ").append(register.getUnits()).append("u ")
                 .append(register.getValue(operation.getDate()));
         return sb.toString();

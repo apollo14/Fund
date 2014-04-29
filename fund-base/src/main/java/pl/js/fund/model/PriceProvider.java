@@ -29,7 +29,7 @@ public class PriceProvider
         this.fund = fund;
     }
 
-    public Double getPrice(LocalDate date)
+    public Double getPriceAtLastBusinessDay(LocalDate date)
     {
 
         Double result = null;
@@ -44,6 +44,19 @@ public class PriceProvider
             date = date.minusDays(1);
         }
         while (result == null);
+
+        return result;
+    }
+
+    public Double getPrice(LocalDate date)
+    {
+        Double result = null;
+
+        if (prices == null || prices.size() == 0)
+        {
+            load();
+        }
+        result = prices.get(DateUtils.formatAsString(DateUtils.getLastBusinessDay(date), DATE_FORMAT));
 
         return result;
     }

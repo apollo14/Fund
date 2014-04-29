@@ -3,6 +3,7 @@ package pl.js.fund.decorator;
 import java.util.List;
 import java.util.Map;
 
+import pl.js.fund.enums.FundName;
 import pl.js.fund.model.IWallet;
 import pl.js.fund.model.Register;
 import pl.js.fund.operation.Operation;
@@ -44,13 +45,14 @@ public abstract class WalletDecorator implements IWallet
         wallet.performOperations();
     }
 
-    public void performOperations(ISimulation simulation){
-    	wallet.performOperations(simulation);
-    }
-    
-    public void addRegister(Register register)
+    public void performOperations(ISimulation simulation)
     {
-        wallet.addRegister(register);
+        wallet.performOperations(simulation);
+    }
+
+    public void addRegister(FundName fundName)
+    {
+        wallet.addRegister(fundName);
     }
 
 }

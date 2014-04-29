@@ -37,7 +37,7 @@ public class Register
 
     public Double getValue(LocalDate date)
     {
-        return (double) Math.round(priceProvider.getPrice(date) * units * 100) / 100;
+        return (double) Math.round(priceProvider.getPriceAtLastBusinessDay(date) * units * 100) / 100;
     }
 
 }

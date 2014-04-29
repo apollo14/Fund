@@ -51,7 +51,7 @@ public abstract class Operation
 
     public void perform(Register register)
     {
-        Double price = register.getPriceProvider().getPrice(this.getDate());
+        Double price = register.getPriceProvider().getPriceAtLastBusinessDay(this.getDate());
 
         this.units = this.getValue() / price;
         this.units = (double) Math.round(this.units * register.getFund().getUnitsRoundingFactor()) / register.getFund().getUnitsRoundingFactor();
