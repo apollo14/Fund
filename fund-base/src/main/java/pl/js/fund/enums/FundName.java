@@ -20,9 +20,9 @@ public enum FundName
     private final static Logger log = LoggerFactory.getLogger(Wallet.class);
     private String              id;
     private String              name;
-    private Class               classValue;
+    private Class<? extends Fund>               classValue;
 
-    FundName(String id, String name, Class classValue)
+    FundName(String id, String name, Class<? extends Fund> classValue)
     {
         this.id = id;
         this.name = name;
@@ -61,7 +61,7 @@ public enum FundName
         try
         {
             // result = (Fund) this.classValue.newInstance();
-            Constructor constructor = this.classValue.getDeclaredConstructor(this.getClass());
+            Constructor<? extends Fund> constructor = this.classValue.getDeclaredConstructor(this.getClass());
             result = (Fund) constructor.newInstance(this);
         }
         catch (Exception e)
