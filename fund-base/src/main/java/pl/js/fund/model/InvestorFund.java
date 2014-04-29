@@ -7,17 +7,17 @@ import org.slf4j.LoggerFactory;
 
 import pl.js.fund.enums.FundName;
 
-public class UnionInvestmentFund extends Fund
+public class InvestorFund extends Fund
 {
-    private static final Logger log        = LoggerFactory.getLogger(UnionInvestmentFund.class);
-    private static final String urlPattern = "http://wyceny.union-investment.pl/historiawycen.php?idfunduszu=%s&action=sendCsv";
+    private static final Logger log        = LoggerFactory.getLogger(InvestorFund.class);
+    private static final String urlPattern = "https://investors.pl/fundusze-inwestycyjne/export/csv/%s";
 
-    public UnionInvestmentFund(FundName fn)
+    public InvestorFund(FundName fn)
     {
         super(fn.getId(), fn.getName());
         this.unitsRoundingFactor = 100000;
-        this.pricePositionIndex = 2;
-        this.priceFileSeparator = ';';
+        this.pricePositionIndex = 1;
+        this.priceFileSeparator = ',';
     }
 
     @Override

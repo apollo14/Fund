@@ -55,10 +55,10 @@ public class PriceProvider
         prices = new TreeMap<String, Double>();
         try
         {
-            reader = new CSVReader(new InputStreamReader(fund.getUrl().openStream()), ';', '\'', 1);
+            reader = new CSVReader(new InputStreamReader(fund.getUrl().openStream()), fund.getPriceFileSeparator(), '\'', 1);
             while ((nextLine = reader.readNext()) != null)
             {
-                prices.put(nextLine[0], Double.valueOf(nextLine[2].replace(',', '.')));
+                prices.put(nextLine[0].replace("\"", ""), Double.valueOf(nextLine[fund.getPricePositionIndex()].replace(',', '.')));
             }
         }
         catch (Exception e)

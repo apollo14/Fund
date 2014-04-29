@@ -7,7 +7,13 @@ public abstract class Fund
     protected String  id;
     protected String  name;
     protected URL     url;
+
+    // number of places aftercoma in units values
     protected Integer unitsRoundingFactor;
+
+    // position of price column in csv file with prices
+    protected Integer pricePositionIndex;
+    protected char    priceFileSeparator;
 
     protected Fund(String id, String name)
     {
@@ -49,6 +55,16 @@ public abstract class Fund
     public Integer getUnitsRoundingFactor()
     {
         return unitsRoundingFactor;
+    }
+
+    public Integer getPricePositionIndex()
+    {
+        return pricePositionIndex;
+    }
+
+    public char getPriceFileSeparator()
+    {
+        return priceFileSeparator;
     }
 
     protected abstract URL evaluateURL();

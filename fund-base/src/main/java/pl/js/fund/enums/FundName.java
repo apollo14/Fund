@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pl.js.fund.model.Fund;
+import pl.js.fund.model.InvestorFund;
 import pl.js.fund.model.UnionInvestmentFund;
 import pl.js.fund.model.Wallet;
 
@@ -15,12 +16,16 @@ public enum FundName
     UI_ANE("36", "UniAkcje: Nowa Europa", UnionInvestmentFund.class),
     UI_P("24", "UniKorona Pieniężny", UnionInvestmentFund.class),
     UI_A("34", "UniKorona Akcje", UnionInvestmentFund.class),
-    UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class);
+    UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class),
 
-    private final static Logger log = LoggerFactory.getLogger(Wallet.class);
-    private String              id;
-    private String              name;
-    private Class<? extends Fund>               classValue;
+    INV_GOTOWKOWY("qnXKPC", "Investor Gotówkowy", InvestorFund.class),
+    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class),
+    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class);
+
+    private final static Logger   log = LoggerFactory.getLogger(Wallet.class);
+    private String                id;
+    private String                name;
+    private Class<? extends Fund> classValue;
 
     FundName(String id, String name, Class<? extends Fund> classValue)
     {
@@ -61,7 +66,8 @@ public enum FundName
         try
         {
             // result = (Fund) this.classValue.newInstance();
-            Constructor<? extends Fund> constructor = this.classValue.getDeclaredConstructor(this.getClass());
+            Constructor<? extends Fund> constructor = this.classValue
+                    .getDeclaredConstructor(this.getClass());
             result = (Fund) constructor.newInstance(this);
         }
         catch (Exception e)

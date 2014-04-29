@@ -23,9 +23,49 @@ public class PriceProviderTest
     }
 
     @Test
-    public void downloadTest()
+    public void investorRosjaTest()
     {
-        Fund fund = new UnionInvestmentFund(FundName.UI_ANE);
+        priceproviderForFund(new InvestorFund(FundName.INV_ROSJA));
+    }
+
+    @Test
+    public void investorTurcjaTest()
+    {
+        priceproviderForFund(new InvestorFund(FundName.INV_TURCJA));
+    }
+
+    @Test
+    public void investorGotówkowyTest()
+    {
+        priceproviderForFund(new InvestorFund(FundName.INV_GOTOWKOWY));
+    }
+
+    @Test
+    public void unionInvestmentANETest()
+    {
+        priceproviderForFund(new UnionInvestmentFund(FundName.UI_ANE));
+    }
+
+    @Test
+    public void unionInvestmentATest()
+    {
+        priceproviderForFund(new UnionInvestmentFund(FundName.UI_A));
+    }
+
+    @Test
+    public void unionInvestmentPTest()
+    {
+        priceproviderForFund(new UnionInvestmentFund(FundName.UI_P));
+    }
+
+    @Test
+    public void unionInvestmentONETest()
+    {
+        priceproviderForFund(new UnionInvestmentFund(FundName.UI_ONE));
+    }
+
+    private void priceproviderForFund(Fund fund)
+    {
         provider.setFund(fund);
 
         Double price = provider.getPrice(new LocalDate(2014, 04, 14));

@@ -4,26 +4,25 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
+import pl.js.fund.model.Fund;
 import pl.js.fund.operation.Operation;
 
-public class NewTrendFirstDayConversion implements ISimulation
-{
+public class NewTrendFirstDayConversion implements ISimulation {
 
-    private LocalDate start;
+	private Fund safe;
+	private Fund riski;
+	private LocalDate start;
 
-    public LocalDate getStart()
-    {
-        return start;
-    }
+	public LocalDate getStart() {
+		return start;
+	}
 
-    public void setStart(LocalDate start)
-    {
-        this.start = start;
-    }
+	public void setStart(LocalDate start) {
+		this.start = start;
+	}
 
-    public List<Operation> getOperations()
-    {
-        return null;
-    }
+	public List<Operation> getOperations() {
+		return null;
+	}
 
 }

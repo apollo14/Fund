@@ -1,16 +1,14 @@
 package pl.js.fund.decorator;
 
-import org.joda.time.LocalDate;
-
 import pl.js.fund.model.IWallet;
 import pl.js.fund.model.Register;
 import pl.js.fund.operation.Operation;
 import pl.js.fund.utils.DateUtils;
 
-public class DefaultWalletDecorator extends WalletDecorator
+public class TextOperationDecorator extends WalletDecorator
 {
 
-    public DefaultWalletDecorator(IWallet wallet)
+    public TextOperationDecorator(IWallet wallet)
     {
         super(wallet);
     }
@@ -29,12 +27,6 @@ public class DefaultWalletDecorator extends WalletDecorator
         {
             performOperation(operation);
         }
-        System.out.println("\nCurrent result:\n");
-        for (String fundName : getRegisters().keySet())
-        {
-            Register register = getRegisters().get(fundName);
-            System.out.println(logRegister(register));
-        }
     }
 
     private String logOperation(Operation operation)
@@ -51,20 +43,10 @@ public class DefaultWalletDecorator extends WalletDecorator
     {
         Register register = getRegisters().get(operation.getFundName());
         StringBuilder sb = new StringBuilder();
-        sb.append(register.getPriceProvider().getPrice(operation.getDate())).append("PLN | ")
-                .append(register.getUnits()).append("u ")
+        sb.append(register.getPriceProvider().getPrice(operation.getDate()))
+                .append("PLN | ").append(register.getUnits()).append("u ")
                 .append(register.getValue(operation.getDate()));
         return sb.toString();
     }
 
-    private String logRegister(Register register)
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append(register.getFund().getName()).append(" ")
-                .append(register.getPriceProvider().getPrice(new LocalDate())).append("PLN | ")
-                .append(register.getUnits()).append("u ")
-                .append(register.getValue(new LocalDate()));
-
-        return sb.toString();
-    }
 }
