@@ -21,7 +21,7 @@ public class UnionInvestmentFund extends Fund
     }
 
     @Override
-    protected URL evaluateURL()
+    public URL evaluatePricingURL()
     {
         URL result = null;
         try

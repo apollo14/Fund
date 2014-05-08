@@ -2,11 +2,13 @@ package pl.js.fund.model;
 
 import org.joda.time.LocalDate;
 
+import pl.js.fund.price.FundPriceProvider;
+
 public class Register
 {
     private Fund          fund;
     private Double        units = 0.0;
-    private PriceProvider priceProvider;
+    private FundPriceProvider priceProvider;
 
     public Fund getFund()
     {
@@ -16,7 +18,7 @@ public class Register
     public void setFund(Fund fund)
     {
         this.fund = fund;
-        this.priceProvider = new PriceProvider();
+        this.priceProvider = new FundPriceProvider();
         this.priceProvider.setFund(this.fund);
     }
 
@@ -30,7 +32,7 @@ public class Register
         this.units = (double) Math.round(units * getFund().getUnitsRoundingFactor()) / getFund().getUnitsRoundingFactor();
     }
 
-    public PriceProvider getPriceProvider()
+    public FundPriceProvider getPriceProvider()
     {
         return priceProvider;
     }

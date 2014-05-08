@@ -25,6 +25,6 @@ public class FundTest
         Fund fund = new UnionInvestmentFund(FundName.UI_ANE);
 
         Assert.assertNotNull(fund);
-        Assert.assertTrue(fund.getUrl().toString().contains(fund.getId()));
+        Assert.assertTrue(fund.evaluatePricingURL().toString().contains(fund.getId()));
     }
 }

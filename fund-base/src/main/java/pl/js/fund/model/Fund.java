@@ -1,12 +1,10 @@
 package pl.js.fund.model;
 
-import java.net.URL;
 
-public abstract class Fund
+public abstract class Fund extends Stock
 {
     protected String  id;
     protected String  name;
-    protected URL     url;
 
     // number of places aftercoma in units values
     protected Integer unitsRoundingFactor;
@@ -19,7 +17,6 @@ public abstract class Fund
     {
         this.id = id;
         this.name = name;
-        this.url = evaluateURL();
     }
 
     public String getId()
@@ -42,16 +39,6 @@ public abstract class Fund
         this.name = name;
     }
 
-    public URL getUrl()
-    {
-        return url;
-    }
-
-    public void setUrl(URL url)
-    {
-        this.url = url;
-    }
-
     public Integer getUnitsRoundingFactor()
     {
         return unitsRoundingFactor;
@@ -67,5 +54,4 @@ public abstract class Fund
         return priceFileSeparator;
     }
 
-    protected abstract URL evaluateURL();
 }

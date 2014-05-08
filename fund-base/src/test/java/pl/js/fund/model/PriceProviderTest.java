@@ -9,17 +9,18 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import pl.js.fund.enums.FundName;
+import pl.js.fund.price.FundPriceProvider;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PriceProviderTest
 {
 
-    PriceProvider provider;
+    FundPriceProvider provider;
 
     @Before
     public void setUp()
     {
-        provider = new PriceProvider();
+        provider = new FundPriceProvider();
     }
 
     @Test
