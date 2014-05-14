@@ -12,7 +12,7 @@ import pl.js.fund.enums.FundName;
 import pl.js.fund.price.FundPriceProvider;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PriceProviderTest
+public class FundPriceProviderTest
 {
 
     FundPriceProvider provider;
