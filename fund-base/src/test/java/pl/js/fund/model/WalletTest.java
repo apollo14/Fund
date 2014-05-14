@@ -44,7 +44,7 @@ public class WalletTest
     }
 
     @Test
-    public void loadOperations()
+    public void performOperations1()
     {
 
         wallet.addRegister(FundName.UI_ANE);
@@ -57,7 +57,7 @@ public class WalletTest
     }
 
     @Test
-    public void performOperations()
+    public void performOperations2()
     {
         wallet.loadOperations(this.getClass().getResource("/operacje2.txt").toString());
         wallet.performOperations();
@@ -66,4 +66,16 @@ public class WalletTest
         Assert.assertEquals(4, wallet.getOperations().size());
 
     }
+
+    @Test
+    public void performOperations3()
+    {
+        wallet.loadOperations(this.getClass().getResource("/operacje3.txt").toString());
+        wallet.performOperations();
+
+        Assert.assertNotNull(wallet.getOperations());
+        // Assert.assertEquals(4, wallet.getOperations().size());
+
+    }
+
 }

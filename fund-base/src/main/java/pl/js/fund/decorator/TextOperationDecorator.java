@@ -16,8 +16,11 @@ public class TextOperationDecorator extends WalletDecorator
     @Override
     public void performOperation(Operation operation)
     {
-        wallet.performOperation(operation);
-        System.out.println(logOperation(operation) + " " + logRegister(operation));
+        if (wallet.getRegisters().get(operation.getFundName()) != null)
+        {
+            wallet.performOperation(operation);
+            System.out.println(logOperation(operation) + " " + logRegister(operation));
+        }
     }
 
     @Override
@@ -44,7 +47,7 @@ public class TextOperationDecorator extends WalletDecorator
         Register register = getRegisters().get(operation.getFundName());
         StringBuilder sb = new StringBuilder();
         sb.append(register.getPriceProvider().getPriceAtLastBusinessDay(operation.getDate()))
-                .append("PLN | ").append(register.getUnits()).append("u ")
+                .append("PLN *** | ").append(register.getUnits()).append("u ")
                 .append(register.getValue(operation.getDate()));
         return sb.toString();
     }

@@ -2,8 +2,8 @@ package pl.js.fund.enums;
 
 public enum OperationType
 {
-    BUY("KUPNO"),
-    SELL("SPRZEDARZ"),
+    BUY("NABYCIE"),
+    SELL("ODKUPIENIE"),
     CONVERSION_UP("KONWERSJA+"),
     CONVERSION_DOWN("KONWERSJA-");
 

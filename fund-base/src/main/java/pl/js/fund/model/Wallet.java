@@ -53,10 +53,17 @@ public class Wallet implements IWallet
     {
         if (!this.getRegisters().keySet().contains(fundName))
         {
-            Fund fund = FundName.parse(fundName).instantiate();
-            Register register = new Register();
-            register.setFund(fund);
-            registers.put(fundName, register);
+            try
+            {
+                Fund fund = FundName.parse(fundName).instantiate();
+                Register register = new Register();
+                register.setFund(fund);
+                registers.put(fundName, register);
+            }
+            catch (Exception e)
+            {
+
+            }
 
         }
     }
@@ -85,7 +92,7 @@ public class Wallet implements IWallet
                         operation = new Sell();
                         break;
                     case CONVERSION_UP:
-                        operation = new Sell();
+                        operation = new Buy();
                         break;
                     case CONVERSION_DOWN:
                         operation = new Sell();
@@ -106,14 +113,18 @@ public class Wallet implements IWallet
         }
         catch (Exception e)
         {
-            log.error("", e);
+            log.error(operation.getDate() + " " + operation.getFundName(), e);
         }
     }
 
     public void performOperation(Operation operation)
     {
         Register register = registers.get(operation.getFundName());
-        operation.perform(register);
+        if (register != null)
+        {
+            // Fund name specified in operation is supported
+            operation.perform(register);
+        }
     }
 
     public void performOperations()
