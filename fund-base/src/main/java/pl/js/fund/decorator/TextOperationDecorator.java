@@ -36,7 +36,8 @@ public class TextOperationDecorator extends WalletDecorator
     {
         StringBuilder sb = new StringBuilder();
         sb.append(DateUtils.formatAsString(operation.getDate(), Operation.DATE_FORMAT)).append(" ")
-                .append(operation.getFundName()).append(" ")
+                .append(operation.getFundName())
+                .append(" | Oper: ")
                 .append(operation.getUnits()).append("u ")
                 .append(operation.getValue()).append("PLN");
         return sb.toString();
@@ -46,9 +47,13 @@ public class TextOperationDecorator extends WalletDecorator
     {
         Register register = getRegisters().get(operation.getFundName());
         StringBuilder sb = new StringBuilder();
-        sb.append(register.getPriceProvider().getPriceAtLastBusinessDay(operation.getDate()))
-                .append("PLN *** | ").append(register.getUnits()).append("u ")
-                .append(register.getValue(operation.getDate()));
+        sb.append("| Reg: ")
+                .append(register.getUnits()).append("u ")
+                .append(register.getValue(operation.getDate()))
+                .append("PLN")
+                .append(" | Price: ")
+                .append(register.getPriceProvider().getPriceAtLastBusinessDay(operation.getDate()))
+                .append("PLN");
         return sb.toString();
     }
 

@@ -15,7 +15,7 @@ public class UnionInvestmentFund extends Fund
     public UnionInvestmentFund(FundName fn)
     {
         super(fn.getId(), fn.getName());
-        this.unitsRoundingFactor = 100000;
+        this.unitsRoundingFactor = 1000000;
         this.pricePositionIndex = 2;
         this.priceFileSeparator = ';';
     }

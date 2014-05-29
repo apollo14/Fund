@@ -3,6 +3,7 @@ package pl.js.fund.model;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pl.js.fund.enums.FundName;
-import pl.js.fund.enums.OperationType;
 import pl.js.fund.operation.Buy;
 import pl.js.fund.operation.Operation;
 import pl.js.fund.operation.Sell;
@@ -83,27 +83,19 @@ public class Wallet implements IWallet
             reader = new CSVReader(new InputStreamReader(new URL(operationsUrl).openStream()), ',', '\'', 0);
             while ((nextLine = reader.readNext()) != null)
             {
-                switch (OperationType.parse(nextLine[2]))
+                Double value = Double.parseDouble(nextLine[2].replace(" ", ""));
+                if (value > 0)
                 {
-                    case BUY:
-                        operation = new Buy();
-                        break;
-                    case SELL:
-                        operation = new Sell();
-                        break;
-                    case CONVERSION_UP:
-                        operation = new Buy();
-                        break;
-                    case CONVERSION_DOWN:
-                        operation = new Sell();
-                        break;
-                    default:
-                        break;
+                    operation = new Buy();
+                }
+                else
+                {
+                    operation = new Sell();
                 }
 
                 operation.setDate(DateUtils.parseFromString(nextLine[0], Operation.DATE_FORMAT));
                 operation.setFundName(nextLine[1]);
-                operation.setValue(Double.parseDouble(nextLine[3].replace(" ", "")));
+                operation.setValue(value);
                 operations.add(operation);
                 if (!registers.containsKey(operation.getFundName()))
                 {
@@ -115,6 +107,7 @@ public class Wallet implements IWallet
         {
             log.error(operation.getDate() + " " + operation.getFundName(), e);
         }
+        Collections.sort(operations);
     }
 
     public void performOperation(Operation operation)

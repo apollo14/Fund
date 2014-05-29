@@ -15,7 +15,7 @@ public class InvestorFund extends Fund
     public InvestorFund(FundName fn)
     {
         super(fn.getId(), fn.getName());
-        this.unitsRoundingFactor = 100000;
+        this.unitsRoundingFactor = 1000000;
         this.pricePositionIndex = 1;
         this.priceFileSeparator = ',';
     }

@@ -4,7 +4,7 @@ import org.joda.time.LocalDate;
 
 import pl.js.fund.model.Register;
 
-public abstract class Operation
+public abstract class Operation implements Comparable<Operation>
 {
     public static final String  DATE_FORMAT     = "dd-MM-yyyy";
     public static final Integer ROUNDING_FACTOR = 100000;
@@ -53,9 +53,14 @@ public abstract class Operation
     {
         Double price = register.getPriceProvider().getPriceAtLastBusinessDay(this.getDate());
 
-        this.units = this.getValue() / price;
+        this.units = Math.abs(this.getValue()) / price;
         this.units = (double) Math.round(this.units * register.getFund().getUnitsRoundingFactor()) / register.getFund().getUnitsRoundingFactor();
 
+    }
+
+    public int compareTo(Operation o)
+    {
+        return getDate().compareTo(o.getDate());
     }
 
 }

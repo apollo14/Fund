@@ -14,7 +14,7 @@ public enum FundName
 {
 
     UI_ANE("36", "UniAkcje: Nowa Europa", UnionInvestmentFund.class),
-    UI_P("24", "UniKorona Pieniężny", UnionInvestmentFund.class),
+    UI_P("24", "UniKorona Pieni�ny", UnionInvestmentFund.class),
     UI_A("34", "UniKorona Akcje", UnionInvestmentFund.class),
     UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class),
 
