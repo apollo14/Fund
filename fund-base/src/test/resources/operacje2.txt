@@ -1,4 +1,4 @@
-10-07-2014,UniKorona Pieniê¿ny,ODKUPIENIE,500.00
+10-07-2014,UniKorona Pieniê¿ny,ODKUPIENIE,2700.00
 10-07-2014,UniAkcje: Nowa Europa,ODKUPIENIE,500.00
 01-07-2014,UniAkcje: Nowa Europa,KONWERSJA,500.00,UniKorona Pieniê¿ny
 08-04-2014,UniKorona Pieniê¿ny,NABYCIE,2 500.00

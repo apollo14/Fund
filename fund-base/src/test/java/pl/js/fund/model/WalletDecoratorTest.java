@@ -31,8 +31,8 @@ public class WalletDecoratorTest
     @Test
     public void defaultWalletDecoratorTest4()
     {
-        wallet.loadOperations(this.getClass().getResource("/operacje4.txt").toString());
-        wallet.performOperations();
+        // wallet.loadOperations(this.getClass().getResource("/operacje4.txt").toString());
+        // wallet.performOperations();
     }
 
 }

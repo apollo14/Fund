@@ -121,7 +121,11 @@ public class Wallet implements IWallet
 
                     operation.setDate(date);
                     operation.setFundName(fundName);
-                    operation.setValue(value * (-1));
+                    operation.setValue(value);
+                    if (operation instanceof Convert)
+                    {
+                        operation.setValue(operation.getValue() * -1);
+                    }
                     addOperation(operation);
                     if (targetFundName != null)
                     {
@@ -130,10 +134,12 @@ public class Wallet implements IWallet
                         targetOperation.setFundName(targetFundName);
                         targetOperation.setValue(value);
                         ((Convert) operation).setConnectedOperation(targetOperation);
-                        targetOperation.setConnectedOperation((Convert) operation);
+                        // targetOperation.setConnectedOperation((Convert) operation);
+                        addOperation(targetOperation);
                     }
                 }
             }
+            reader.close();
         }
         catch (Exception e)
         {
