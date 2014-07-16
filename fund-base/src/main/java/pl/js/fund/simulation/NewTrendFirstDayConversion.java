@@ -45,7 +45,7 @@ public class NewTrendFirstDayConversion implements ISimulation
 
         while (currentDate.isAfter(date))
         {
-            if (wallet.getRegisters().get(safe.getName()).getPriceProvider().getPrice(date) != null)
+            if (wallet.getRegister(safe.getName()).getPriceProvider().getPrice(date) != null)
             {
 
             }

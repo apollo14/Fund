@@ -1,14 +1,26 @@
 package pl.js.fund.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.joda.time.LocalDate;
 
+import pl.js.fund.operation.Operation;
 import pl.js.fund.price.FundPriceProvider;
 
 public class Register
 {
-    private Fund          fund;
-    private Double        units = 0.0;
+    private Umbrella          umbrella;
+    private Fund              fund;
+    private Double            units = 0.0;
     private FundPriceProvider priceProvider;
+    private List<Operation>   operations;
+
+    public Register()
+    {
+        operations = new ArrayList<Operation>();
+    }
 
     public Fund getFund()
     {
@@ -37,9 +49,46 @@ public class Register
         return priceProvider;
     }
 
+    public Umbrella getUmbrella()
+    {
+        return umbrella;
+    }
+
+    public void setUmbrella(Umbrella umbrella)
+    {
+        this.umbrella = umbrella;
+    }
+
     public Double getValue(LocalDate date)
     {
         return (double) Math.round(priceProvider.getPriceAtLastBusinessDay(date) * units * 100) / 100;
     }
 
+    public void addOperation(Operation operation)
+    {
+        this.operations.add(operation);
+        Collections.sort(this.operations);
+    }
+
+    public List<Operation> getOperations()
+    {
+        return operations;
+    }
+
+    public void performOperations()
+    {
+        for (Operation o : this.operations)
+        {
+            o.perform(this);
+        }
+    }
+
+    public void performOperations(List<Operation> operationsSim)
+    {
+        for (Operation o : operationsSim)
+        {
+            o.perform(this);
+        }
+
+    }
 }

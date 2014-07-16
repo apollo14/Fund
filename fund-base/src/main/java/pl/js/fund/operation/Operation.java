@@ -13,6 +13,9 @@ public abstract class Operation implements Comparable<Operation>
     private LocalDate           date;
     private Double              value;
     protected Double            units;
+    protected Double            price;
+    protected Double            taxBase         = 0.0;
+    protected Double            taxUnits        = 0.0;
 
     public String getFundName()
     {
@@ -49,13 +52,19 @@ public abstract class Operation implements Comparable<Operation>
         return units;
     }
 
+    public Double getPrice()
+    {
+        return price;
+    }
+
     public void perform(Register register)
     {
-        Double price = register.getPriceProvider().getPriceAtLastBusinessDay(this.getDate());
+        this.price = register.getPriceProvider().getPriceAtLastBusinessDay(this.getDate());
 
         this.units = Math.abs(this.getValue()) / price;
         this.units = (double) Math.round(this.units * register.getFund().getUnitsRoundingFactor()) / register.getFund().getUnitsRoundingFactor();
 
+        this.taxUnits = new Double(this.units);
     }
 
     public int compareTo(Operation o)
@@ -63,4 +72,8 @@ public abstract class Operation implements Comparable<Operation>
         return getDate().compareTo(o.getDate());
     }
 
+    public String toString()
+    {
+        return date.toString(DATE_FORMAT) + ", " + value.toString();
+    }
 }

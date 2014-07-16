@@ -69,27 +69,28 @@ public class SharePriceProvider extends PriceProvider
     private InputStream connect() throws Exception
     {
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost("http://www.money.pl/gielda/archiwum/spolki/");
-
+        // http://www.gpwinfostrefa.pl/GPWIS2/pl/quotes/archive/2?dateFrom=2014-06-05&dateTo=2014-06-05&instrumentType=10&isin=PLVCAOC00015
+        HttpPost post = new HttpPost("http://www.gpwinfostrefa.pl/GPWIS2/pl/quotes/archive/3");
         // add header
-        post.setHeader("Host", "www.money.pl");
-        post.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0");
-        post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        post.setHeader("Accept-Language", "pl,en-us;q=0.7,en;q=0.3");
-        post.setHeader("Accept-Encoding", "gzip, deflate");
-        post.setHeader("Referer", "http://www.money.pl/gielda/archiwum/spolki/");
-        post.setHeader("Connection", "keep-alive");
-        post.setHeader(
-                "Cookie",
-                "node_id=3; __utma=148686129.556853546.1400070503.1400070503.1400070503.1; __utmc=148686129; __utmz=148686129.1400070503.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=126045522.1970658251.1400070503.1400070503.1400070503.1; __utmc=126045522; __utmz=126045522.1400070503.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __gfp_64b=rfqKdgPQJ.V4MRI49nOEybK49fx_Dz4rIUJeXofbhT3.k7; leadu2=%7B%22u%22%3A%22809c9018eabf319b8b7f510146372fb4%22%2C%22d%22%3A1400140529%2C%22c%22%3A0%7D; usertrack=e3b350c30ab2679ede84abec6e2085ba");
+        // post.setHeader("Host", "www.gpwinfostrefa.pl");
+        // post.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0");
+        // post.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        // post.setHeader("Accept-Language", "pl,en-us;q=0.7,en;q=0.3");
+        // post.setHeader("Accept-Encoding", "gzip, deflate");
+        // post.setHeader("Referrer",
+        // "http://www.gpwinfostrefa.pl/GPWIS2/pl/quotes/archive/2;jsessionid=wtsphk9VK2GCtotZhwmF7hxS.undefined");
+        // post.setHeader("Connection", "keep-alive");
+        // post.setHeader("Content-Type", "text/plain; charset=UTF-8");
+        // post.setHeader( "Cookie",
+        // "JSESSIONID=wtsphk9VK2GCtotZhwmF7hxS.undefined; __gfp_64b=rfqKdgPQJ.V4MRI49nOEybK49fx_Dz4rIUJeXofbhT3.k7; __utma=83722816.256969634.1400141329.1400141329.1401369365.2; __utmz=83722816.1400141329.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmb=83722816.2.10.1401369365; __utmc=83722816; papcook=true");
+        // post.setHeader("Pragma", "no-cache");
+        // post.setHeader("Content-Length", "144");
 
         List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
-        urlParameters.add(new BasicNameValuePair("symbol", share.getId()));
-        urlParameters.add(new BasicNameValuePair("od", "1914-05-14"));
-        urlParameters.add(new BasicNameValuePair("do", "2014-05-14"));
-        // urlParameters.add(new BasicNameValuePair("period", "-100+year"));
-        urlParameters.add(new BasicNameValuePair("format", "csv"));
-        // urlParameters.add(new BasicNameValuePair("show", "Poka%BF"));
+        urlParameters.add(new BasicNameValuePair("dateFrom", "2014-05-01"));
+        urlParameters.add(new BasicNameValuePair("dateTo", "2014-05-29"));
+        urlParameters.add(new BasicNameValuePair("instrumentType", "10"));
+        urlParameters.add(new BasicNameValuePair("isin", "PLVCAOC00015"));
 
         post.setEntity(new UrlEncodedFormEntity(urlParameters));
 

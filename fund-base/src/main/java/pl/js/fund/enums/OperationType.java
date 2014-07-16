@@ -4,8 +4,7 @@ public enum OperationType
 {
     BUY("NABYCIE"),
     SELL("ODKUPIENIE"),
-    CONVERSION_UP("KONWERSJA+"),
-    CONVERSION_DOWN("KONWERSJA-");
+    CONVERSION("KONWERSJA");
 
     private final String type;
 

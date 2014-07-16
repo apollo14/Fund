@@ -2,7 +2,7 @@ package pl.js.fund.operation;
 
 import pl.js.fund.model.Register;
 
-public class Buy extends Operation
+public class Convert extends Operation
 {
 
     @Override
@@ -12,5 +12,4 @@ public class Buy extends Operation
         register.setUnits(register.getUnits() + units);
 
     }
-
 }

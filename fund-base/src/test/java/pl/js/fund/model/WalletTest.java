@@ -8,8 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import pl.js.fund.enums.FundName;
-import pl.js.fund.operation.Operation;
-import pl.js.fund.operation.Sell;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WalletTest
@@ -22,38 +20,17 @@ public class WalletTest
         wallet = new Wallet();
     }
 
-    @Test
-    public void addOperationTest() throws Exception
-    {
-        Operation operation = new Sell();
-
-        wallet.addOperation(operation);
-
-        Assert.assertNotNull(wallet.getOperations());
-        Assert.assertEquals(1, wallet.getOperations().size());
-    }
-
-    @Test
-    public void addRegister()
-    {
-
-        wallet.addRegister(FundName.UI_ANE);
-
-        Assert.assertNotNull(wallet.getRegisters());
-        Assert.assertEquals(1, wallet.getRegisters().keySet().size());
-    }
-
-    @Test
+    // @Test
     public void performOperations1()
     {
 
-        wallet.addRegister(FundName.UI_ANE);
-        wallet.addRegister(FundName.UI_P);
-
         wallet.loadOperations(this.getClass().getResource("/operacje.txt").toString());
+        wallet.performOperations();
 
-        Assert.assertNotNull(wallet.getOperations());
-        Assert.assertEquals(2, wallet.getOperations().size());
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE.getName()));
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_P.getName()));
+        Assert.assertEquals(1, wallet.getRegister(FundName.UI_ANE.getName()).getOperations().size());
+        Assert.assertEquals(1, wallet.getRegister(FundName.UI_P.getName()).getOperations().size());
     }
 
     @Test
@@ -62,8 +39,10 @@ public class WalletTest
         wallet.loadOperations(this.getClass().getResource("/operacje2.txt").toString());
         wallet.performOperations();
 
-        Assert.assertNotNull(wallet.getOperations());
-        Assert.assertEquals(4, wallet.getOperations().size());
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE.getName()));
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_P.getName()));
+        Assert.assertEquals(2, wallet.getRegister(FundName.UI_ANE.getName()).getOperations().size());
+        Assert.assertEquals(2, wallet.getRegister(FundName.UI_P.getName()).getOperations().size());
 
     }
 
@@ -73,9 +52,10 @@ public class WalletTest
         wallet.loadOperations(this.getClass().getResource("/operacje3.txt").toString());
         wallet.performOperations();
 
-        Assert.assertNotNull(wallet.getOperations());
-        // Assert.assertEquals(4, wallet.getOperations().size());
-
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE.getName()));
+        Assert.assertNotNull(wallet.getRegister(FundName.INV_ROSJA.getName()));
+        Assert.assertEquals(3, wallet.getRegister(FundName.UI_ANE.getName()).getOperations().size());
+        Assert.assertEquals(2, wallet.getRegister(FundName.INV_ROSJA.getName()).getOperations().size());
     }
 
 }

@@ -3,9 +3,6 @@ package pl.js.fund.model;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.js.fund.decorator.TextOperationDecorator;
-import pl.js.fund.decorator.TextRegisterDecorator;
-
 public class WalletDecoratorTest
 {
 
@@ -14,7 +11,7 @@ public class WalletDecoratorTest
     @Before
     public void setUp()
     {
-        wallet = new TextRegisterDecorator(new TextOperationDecorator(new Wallet()));
+        // wallet = new TextRegisterDecorator(new TextOperationDecorator(new Wallet()));
     }
 
     @Test

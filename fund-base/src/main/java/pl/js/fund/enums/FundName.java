@@ -13,25 +13,27 @@ import pl.js.fund.model.Wallet;
 public enum FundName
 {
 
-    UI_ANE("36", "UniAkcje: Nowa Europa", UnionInvestmentFund.class),
-    UI_P("24", "UniKorona Pieniê¿ny", UnionInvestmentFund.class),
-    UI_A("34", "UniKorona Akcje", UnionInvestmentFund.class),
-    UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class),
+    UI_ANE("36", "UniAkcje: Nowa Europa", UnionInvestmentFund.class, UmbrellaId.UI),
+    UI_P("24", "UniKorona Pieniê¿ny", UnionInvestmentFund.class, UmbrellaId.UI),
+    UI_A("34", "UniKorona Akcje", UnionInvestmentFund.class, UmbrellaId.UI),
+    UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class, UmbrellaId.UI),
 
-    INV_GOTOWKOWY("qnXKPC", "Investor GotÃ³wkowy", InvestorFund.class),
-    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class),
-    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class);
+    INV_GOTOWKOWY("qnXKPC", "Investor GotÃ³wkowy", InvestorFund.class, UmbrellaId.INV),
+    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class, UmbrellaId.INV),
+    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class, UmbrellaId.INV);
 
     private final static Logger   log = LoggerFactory.getLogger(Wallet.class);
     private String                id;
     private String                name;
+    private UmbrellaId            umbrellaId;
     private Class<? extends Fund> classValue;
 
-    FundName(String id, String name, Class<? extends Fund> classValue)
+    FundName(String id, String name, Class<? extends Fund> classValue, UmbrellaId umbrellaId)
     {
         this.id = id;
         this.name = name;
         this.classValue = classValue;
+        this.umbrellaId = umbrellaId;
     }
 
     public String getId()
@@ -42,6 +44,11 @@ public enum FundName
     public String getName()
     {
         return this.name;
+    }
+
+    public UmbrellaId getUmbrellaId()
+    {
+        return umbrellaId;
     }
 
     public static FundName parse(String fundName)
@@ -76,5 +83,20 @@ public enum FundName
         }
         return result;
 
+    }
+
+    public static boolean contains(String fundName)
+    {
+        boolean result = false;
+        for (FundName fn : values())
+        {
+            if (fn.getName().equalsIgnoreCase(fundName))
+            {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 }
