@@ -74,6 +74,6 @@ public abstract class Operation implements Comparable<Operation>
 
     public String toString()
     {
-        return date.toString(DATE_FORMAT) + ", " + value.toString();
+        return date.toString(DATE_FORMAT) + ", " + value.toString() + ", price=" + price.toString() + ", units=" + units.toString();
     }
 }

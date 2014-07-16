@@ -1,13 +1,13 @@
 package pl.js.fund.enums;
 
-
 public enum FundOperationsFileColumns
 {
 
     DATE(0),
     FUND_NAME(1),
     OPERATION_TYPE(2),
-    VALUE(3);
+    VALUE(3),
+    TARGET_FUND_NAME(4);
 
     private int id;
 

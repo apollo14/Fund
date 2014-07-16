@@ -46,7 +46,7 @@ public class WalletTest
 
     }
 
-    @Test
+    // @Test
     public void performOperations3()
     {
         wallet.loadOperations(this.getClass().getResource("/operacje3.txt").toString());

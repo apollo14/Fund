@@ -13,4 +13,9 @@ public class Buy extends Operation
 
     }
 
+    public String toString()
+    {
+        return "B " + super.toString();
+    }
+
 }

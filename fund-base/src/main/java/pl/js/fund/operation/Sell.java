@@ -32,13 +32,13 @@ public class Sell extends Operation
             {
                 if (o.taxUnits < this.taxUnits)
                 {
-                    this.taxBase = this.taxBase + ((o.taxUnits * this.price) - (o.taxUnits * o.price));
+                    this.taxBase = this.taxBase + (Math.round((o.taxUnits * this.price) * 100) / 100 - Math.round((o.taxUnits * o.price) * 100) / 100);
                     this.taxUnits = this.taxUnits - o.taxUnits;
                     o.taxUnits = 0.0;
                 }
                 else
                 {
-                    this.taxBase = this.taxBase + ((this.taxUnits * this.price) - (this.taxUnits * o.price));
+                    this.taxBase = this.taxBase + (Math.round((this.taxUnits * this.price) * 100) / 100 - Math.round((this.taxUnits * o.price) * 100) / 100);
                     o.taxUnits = o.taxUnits - this.taxUnits;
                     this.taxUnits = 0.0;
                 }
@@ -47,12 +47,12 @@ public class Sell extends Operation
         }
         if (taxBase > 0)
         {
-            taxValue = new Double(Math.round(taxBase * 19) / 100);
+            taxValue = new Double(Math.round(taxBase * 19)) / 100;
         }
     }
 
     public String toString()
     {
-        return super.toString() + ", tax=" + taxValue;
+        return "S " + super.toString() + ", tax=" + taxValue;
     }
 }

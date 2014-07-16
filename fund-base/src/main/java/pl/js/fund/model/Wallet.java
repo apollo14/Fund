@@ -91,6 +91,19 @@ public class Wallet implements IWallet
                     Double value = Double.parseDouble(nextLine[FundOperationsFileColumns.VALUE.getId()].replace(" ", ""));
                     LocalDate date = DateUtils.parseFromString(nextLine[FundOperationsFileColumns.DATE.getId()], Operation.DATE_FORMAT);
                     OperationType operationType = OperationType.parse(nextLine[FundOperationsFileColumns.OPERATION_TYPE.getId()]);
+                    String targetFundName = null;
+                    if (OperationType.CONVERSION.equals(operationType))
+                    {
+                        if (nextLine.length == FundOperationsFileColumns.TARGET_FUND_NAME.getId() + 1)
+                        {
+                            targetFundName = nextLine[FundOperationsFileColumns.TARGET_FUND_NAME.getId()];
+                        }
+                        else
+                        {
+                            throw new RuntimeException("Wallet.loadOperations() - Target fund empty in conversion operation");
+                        }
+                    }
+
                     switch (operationType)
                     {
                         case BUY:
@@ -108,14 +121,17 @@ public class Wallet implements IWallet
 
                     operation.setDate(date);
                     operation.setFundName(fundName);
-                    operation.setValue(value);
-                    if (!registers.containsKey(fundName))
+                    operation.setValue(value * (-1));
+                    addOperation(operation);
+                    if (targetFundName != null)
                     {
-                        addRegister(fundName);
+                        Convert targetOperation = new Convert();
+                        targetOperation.setDate(date);
+                        targetOperation.setFundName(targetFundName);
+                        targetOperation.setValue(value);
+                        ((Convert) operation).setConnectedOperation(targetOperation);
+                        targetOperation.setConnectedOperation((Convert) operation);
                     }
-                    registers.get(fundName).addOperation(operation);
-                    String umbrellaId = registers.get(fundName).getFund().fundName.getUmbrellaId().getId();
-                    umbrellas.get(umbrellaId).addOperations(operation);
                 }
             }
         }
@@ -124,6 +140,17 @@ public class Wallet implements IWallet
             log.error(operation.getDate() + " " + operation.getFundName(), e);
         }
 
+    }
+
+    private void addOperation(Operation operation)
+    {
+        if (!registers.containsKey(operation.getFundName()))
+        {
+            addRegister(operation.getFundName());
+        }
+        registers.get(operation.getFundName()).addOperation(operation);
+        String umbrellaId = registers.get(operation.getFundName()).getFund().fundName.getUmbrellaId().getId();
+        umbrellas.get(umbrellaId).addOperations(operation);
     }
 
     public void performOperations()
