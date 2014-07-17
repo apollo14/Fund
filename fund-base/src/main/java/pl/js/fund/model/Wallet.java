@@ -1,5 +1,6 @@
 package pl.js.fund.model;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -54,7 +55,7 @@ public class Wallet implements IWallet
                 Umbrella umbrella = null;
                 if (!umbrellas.keySet().contains(fund.fundName.getUmbrellaId()))
                 {
-                    umbrella = new Umbrella(fund.fundName.getUmbrellaId());
+                    umbrella = new Umbrella();
                     umbrellas.put(fund.fundName.getUmbrellaId(), umbrella);
                 }
                 else
@@ -137,11 +138,22 @@ public class Wallet implements IWallet
                 }
 
             }
-            reader.close();
         }
         catch (Exception e)
         {
+
             log.error(operation.getDate() + " " + operation.getFundName(), e);
+        }
+        finally
+        {
+            try
+            {
+                reader.close();
+            }
+            catch (IOException ioe)
+            {
+                throw new RuntimeException("Wallet.loadOperations()", ioe);
+            }
         }
 
     }
