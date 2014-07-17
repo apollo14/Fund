@@ -1,8 +1,10 @@
 package pl.js.fund.price;
 
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.TreeMap;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,17 +33,23 @@ public class FundPriceProvider extends PriceProvider
         this.fund = fund;
     }
 
+    public BigDecimal getPriceAtLastBusinessDay(Fund fund, LocalDate date)
+    {
+        this.fund = fund;
+        return super.getPriceAtLastBusinessDay(date);
+    }
+
     protected void load()
     {
         CSVReader reader = null;
         String[] nextLine;
-        prices = new TreeMap<String, Double>();
+        prices = new TreeMap<String, BigDecimal>();
         try
         {
             reader = new CSVReader(new InputStreamReader(fund.evaluatePricingURL().openStream()), fund.getPriceFileSeparator(), '\'', 1);
             while ((nextLine = reader.readNext()) != null)
             {
-                prices.put(nextLine[0].replace("\"", ""), Double.valueOf(nextLine[fund.getPricePositionIndex()].replace(',', '.')));
+                prices.put(nextLine[0].replace("\"", ""), new BigDecimal(nextLine[fund.getPricePositionIndex()].replace(',', '.')));
             }
         }
         catch (Exception e)

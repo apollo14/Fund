@@ -1,5 +1,6 @@
 package pl.js.fund.price;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.joda.time.LocalDate;
@@ -9,14 +10,14 @@ import pl.js.fund.utils.DateUtils;
 
 public abstract class PriceProvider implements IPriceProvider
 {
-    protected String              dateFormat;
-    protected Stock               stock;
-    protected Map<String, Double> prices;
+    protected String                  dateFormat;
+    protected Stock                   stock;
+    protected Map<String, BigDecimal> prices;
 
-    public Double getPriceAtLastBusinessDay(LocalDate date)
+    public BigDecimal getPriceAtLastBusinessDay(LocalDate date)
     {
 
-        Double result = null;
+        BigDecimal result = null;
 
         if (this.prices == null || this.prices.size() == 0)
         {
@@ -32,9 +33,9 @@ public abstract class PriceProvider implements IPriceProvider
         return result;
     }
 
-    public Double getPrice(LocalDate date)
+    public BigDecimal getPrice(LocalDate date)
     {
-        Double result = null;
+        BigDecimal result = null;
 
         if (prices == null || prices.size() == 0)
         {

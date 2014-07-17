@@ -1,5 +1,6 @@
 package pl.js.fund.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,6 +50,12 @@ public class Register
         return priceProvider;
     }
 
+    public void setPriceProvider(FundPriceProvider priceProvider)
+    {
+        this.priceProvider = priceProvider;
+        this.priceProvider.setFund(this.fund);
+    }
+
     public Umbrella getUmbrella()
     {
         return umbrella;
@@ -59,9 +66,9 @@ public class Register
         this.umbrella = umbrella;
     }
 
-    public Double getValue(LocalDate date)
+    public BigDecimal getValue(LocalDate date)
     {
-        return (double) Math.round(priceProvider.getPriceAtLastBusinessDay(date) * units * 100) / 100;
+        return priceProvider.getPriceAtLastBusinessDay(date).multiply(new BigDecimal(units));
     }
 
     public void addOperation(Operation operation)

@@ -27,35 +27,35 @@ public class WalletTest
         wallet.loadOperations(this.getClass().getResource("/operacje.txt").toString());
         wallet.performOperations();
 
-        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE.getName()));
-        Assert.assertNotNull(wallet.getRegister(FundName.UI_P.getName()));
-        Assert.assertEquals(1, wallet.getRegister(FundName.UI_ANE.getName()).getOperations().size());
-        Assert.assertEquals(1, wallet.getRegister(FundName.UI_P.getName()).getOperations().size());
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE));
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_P));
+        Assert.assertEquals(1, wallet.getRegister(FundName.UI_ANE).getOperations().size());
+        Assert.assertEquals(1, wallet.getRegister(FundName.UI_P).getOperations().size());
     }
 
-    @Test
+    // @Test
     public void performOperations2()
     {
         wallet.loadOperations(this.getClass().getResource("/operacje2.txt").toString());
         wallet.performOperations();
 
-        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE.getName()));
-        Assert.assertNotNull(wallet.getRegister(FundName.UI_P.getName()));
-        Assert.assertEquals(2, wallet.getRegister(FundName.UI_ANE.getName()).getOperations().size());
-        Assert.assertEquals(2, wallet.getRegister(FundName.UI_P.getName()).getOperations().size());
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE));
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_P));
+        Assert.assertEquals(3, wallet.getRegister(FundName.UI_ANE).getOperations().size());
+        Assert.assertEquals(3, wallet.getRegister(FundName.UI_P).getOperations().size());
 
     }
 
-    // @Test
+    @Test
     public void performOperations3()
     {
         wallet.loadOperations(this.getClass().getResource("/operacje3.txt").toString());
         wallet.performOperations();
 
-        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE.getName()));
-        Assert.assertNotNull(wallet.getRegister(FundName.INV_ROSJA.getName()));
-        Assert.assertEquals(3, wallet.getRegister(FundName.UI_ANE.getName()).getOperations().size());
-        Assert.assertEquals(2, wallet.getRegister(FundName.INV_ROSJA.getName()).getOperations().size());
+        Assert.assertNotNull(wallet.getRegister(FundName.UI_ANE));
+        Assert.assertNotNull(wallet.getRegister(FundName.INV_ROSJA));
+        Assert.assertEquals(3, wallet.getRegister(FundName.UI_ANE).getOperations().size());
+        Assert.assertEquals(2, wallet.getRegister(FundName.INV_ROSJA).getOperations().size());
     }
 
 }

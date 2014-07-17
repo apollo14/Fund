@@ -17,6 +17,11 @@ public class Sell extends Operation
 
     }
 
+    public Double getTaxValue()
+    {
+        return taxValue;
+    }
+
     public String toString()
     {
         return "S " + super.toString() + ", tax=" + taxValue;

@@ -6,7 +6,7 @@ import pl.js.fund.simulation.ISimulation;
 public interface IWallet
 {
 
-    public Register getRegister(String fundName);
+    public Register getRegister(FundName fundName);
 
     public void addRegister(FundName fundName);
 

@@ -85,18 +85,8 @@ public enum FundName
 
     }
 
-    public static boolean contains(String fundName)
+    public String toString()
     {
-        boolean result = false;
-        for (FundName fn : values())
-        {
-            if (fn.getName().equalsIgnoreCase(fundName))
-            {
-                result = true;
-                break;
-            }
-        }
-
-        return result;
+        return this.getName();
     }
 }

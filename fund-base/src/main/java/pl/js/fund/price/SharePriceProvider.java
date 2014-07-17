@@ -3,6 +3,7 @@ package pl.js.fund.price;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -41,7 +42,7 @@ public class SharePriceProvider extends PriceProvider
     {
         CSVReader reader = null;
         String[] nextLine;
-        prices = new TreeMap<String, Double>();
+        prices = new TreeMap<String, BigDecimal>();
         try
         {
             /*

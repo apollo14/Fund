@@ -1,9 +1,11 @@
 package pl.js.fund.operation;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.joda.time.LocalDate;
 
+import pl.js.fund.enums.FundName;
 import pl.js.fund.model.Register;
 
 public abstract class Operation implements Comparable<Operation>
@@ -11,20 +13,20 @@ public abstract class Operation implements Comparable<Operation>
     public static final String  DATE_FORMAT     = "dd-MM-yyyy";
     public static final Integer ROUNDING_FACTOR = 100000;
 
-    private String              fundName;
+    private FundName            fundName;
     private LocalDate           date;
-    private Double              value;
-    protected Double            units;
-    protected Double            price;
-    protected Double            taxBase         = 0.0;
-    protected Double            taxUnits        = 0.0;
+    private BigDecimal          value;
+    protected BigDecimal        units;
+    protected BigDecimal        price;
+    protected BigDecimal        taxBase         = BigDecimal.ZERO;
+    protected BigDecimal        taxUnits        = BigDecimal.ZERO;
 
-    public String getFundName()
+    public FundName getFundName()
     {
         return fundName;
     }
 
-    public void setFundName(String fundName)
+    public void setFundName(FundName fundName)
     {
         this.fundName = fundName;
     }
@@ -39,27 +41,27 @@ public abstract class Operation implements Comparable<Operation>
         this.date = date;
     }
 
-    public Double getValue()
+    public BigDecimal getValue()
     {
         return value;
     }
 
-    public void setValue(Double value)
+    public void setValue(BigDecimal value)
     {
         this.value = value;
     }
 
-    public Double getUnits()
+    public BigDecimal getUnits()
     {
         return units;
     }
 
-    public Double getPrice()
+    public BigDecimal getPrice()
     {
         return price;
     }
 
-    protected Double calculateTaxBase(Register register)
+    protected BigDecimal calculateTaxBase(Register register)
     {
         // w ramach funduszu - kompensacja pionowa
         List<Operation> operations = register.getOperations().subList(0, register.getOperations().size());
@@ -68,24 +70,26 @@ public abstract class Operation implements Comparable<Operation>
         // register.getUmbrella().getOperations().size());
         for (Operation o : operations)
         {
-            if ((o instanceof Buy) && o.taxUnits > 0)
+            if ((o instanceof Buy) && o.taxUnits.compareTo(BigDecimal.ZERO) == 1)
             {
                 calculateTaxBase(o);
             }
-            if ((o instanceof Convert) && o.taxUnits > 0)// && ((Convert) o).getConnectedOperation() != null)
+            if ((o instanceof Convert) && o.taxUnits.compareTo(BigDecimal.ZERO) == 1)// && ((Convert)
+                                                                                     // o).getConnectedOperation() !=
+                                                                                     // null)
             {
                 calculateTaxBase(o);
             }
-            if (this.taxUnits == 0.0)
+            if (this.taxUnits == BigDecimal.ZERO)
             {
                 break;
             }
         }
-        if (taxBase > 0)
+        if (taxBase.compareTo(BigDecimal.ZERO) == 1)
         {
-            return new Double(Math.round(taxBase * 19)) / 100;
+            return taxBase.multiply(new BigDecimal(0.19));
         }
-        return 0.0;
+        return BigDecimal.ZERO;
     }
 
     private void calculateTaxBase(Operation o)
@@ -129,10 +133,21 @@ public abstract class Operation implements Comparable<Operation>
     {
         this.price = register.getPriceProvider().getPriceAtLastBusinessDay(this.getDate());
 
-        this.units = Math.abs(this.getValue()) / price;
-        this.units = (double) Math.round(this.units * register.getFund().getUnitsRoundingFactor()) / register.getFund().getUnitsRoundingFactor();
+        this.units = this.getValue().abs().divide(price);
+        // this.units = (double) Math.round(this.units * register.getFund().getUnitsRoundingFactor()) /
+        // register.getFund().getUnitsRoundingFactor();
 
-        this.taxUnits = new Double(this.units);
+        this.taxUnits = this.units.multiply(new BigDecimal(1));
+    }
+
+    public BigDecimal getTaxBase()
+    {
+        return taxBase;
+    }
+
+    public BigDecimal getTaxUnits()
+    {
+        return taxUnits;
     }
 
     public int compareTo(Operation o)
