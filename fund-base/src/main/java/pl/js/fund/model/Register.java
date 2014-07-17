@@ -14,7 +14,7 @@ public class Register
 {
     private Umbrella          umbrella;
     private Fund              fund;
-    private Double            units = 0.0;
+    private BigDecimal        units = BigDecimal.ZERO;
     private FundPriceProvider priceProvider;
     private List<Operation>   operations;
 
@@ -35,14 +35,14 @@ public class Register
         this.priceProvider.setFund(this.fund);
     }
 
-    public Double getUnits()
+    public BigDecimal getUnits()
     {
         return units;
     }
 
-    public void setUnits(Double units)
+    public void setUnits(BigDecimal units)
     {
-        this.units = (double) Math.round(units * getFund().getUnitsRoundingFactor()) / getFund().getUnitsRoundingFactor();
+        this.units = units;
     }
 
     public FundPriceProvider getPriceProvider()
@@ -68,7 +68,7 @@ public class Register
 
     public BigDecimal getValue(LocalDate date)
     {
-        return priceProvider.getPriceAtLastBusinessDay(date).multiply(new BigDecimal(units));
+        return priceProvider.getPriceAtLastBusinessDay(date).multiply(units);
     }
 
     public void addOperation(Operation operation)

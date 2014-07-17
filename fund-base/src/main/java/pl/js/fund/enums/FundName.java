@@ -13,27 +13,29 @@ import pl.js.fund.model.Wallet;
 public enum FundName
 {
 
-    UI_ANE("36", "UniAkcje: Nowa Europa", UnionInvestmentFund.class, UmbrellaId.UI),
-    UI_P("24", "UniKorona Pieniê¿ny", UnionInvestmentFund.class, UmbrellaId.UI),
-    UI_A("34", "UniKorona Akcje", UnionInvestmentFund.class, UmbrellaId.UI),
-    UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class, UmbrellaId.UI),
+    UI_ANE("36", "UniAkcje: Nowa Europa", UnionInvestmentFund.class, UmbrellaId.UI, 6),
+    UI_P("24", "UniKorona Pieniê¿ny", UnionInvestmentFund.class, UmbrellaId.UI, 6),
+    UI_A("34", "UniKorona Akcje", UnionInvestmentFund.class, UmbrellaId.UI, 6),
+    UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class, UmbrellaId.UI, 6),
 
-    INV_GOTOWKOWY("qnXKPC", "Investor GotÃ³wkowy", InvestorFund.class, UmbrellaId.INV),
-    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class, UmbrellaId.INV),
-    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class, UmbrellaId.INV);
+    INV_GOTOWKOWY("qnXKPC", "Investor GotÃ³wkowy", InvestorFund.class, UmbrellaId.INV, 6),
+    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class, UmbrellaId.INV, 6),
+    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class, UmbrellaId.INV, 6);
 
     private final static Logger   log = LoggerFactory.getLogger(Wallet.class);
     private String                id;
     private String                name;
     private UmbrellaId            umbrellaId;
+    private int                   unitsScale;
     private Class<? extends Fund> classValue;
 
-    FundName(String id, String name, Class<? extends Fund> classValue, UmbrellaId umbrellaId)
+    FundName(String id, String name, Class<? extends Fund> classValue, UmbrellaId umbrellaId, int unitsScale)
     {
         this.id = id;
         this.name = name;
         this.classValue = classValue;
         this.umbrellaId = umbrellaId;
+        this.unitsScale = unitsScale;
     }
 
     public String getId()

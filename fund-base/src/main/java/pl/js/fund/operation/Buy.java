@@ -9,7 +9,7 @@ public class Buy extends Operation
     public void perform(Register register)
     {
         super.perform(register);
-        register.setUnits(register.getUnits() + units);
+        register.setUnits(register.getUnits().add(units));
 
     }
 
