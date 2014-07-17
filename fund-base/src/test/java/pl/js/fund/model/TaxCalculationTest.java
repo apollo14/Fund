@@ -62,19 +62,21 @@ public class TaxCalculationTest
         Mockito.doReturn(TestHelper.PRICE_UI_ANE_3).when(priceProviderUIANE).getPriceAtLastBusinessDay(TestHelper.DAY_3);
 
         Mockito.doReturn(TestHelper.PRICE_UI_P_1).when(priceProviderUIP).getPriceAtLastBusinessDay(TestHelper.DAY_1);
+        Mockito.doReturn(TestHelper.PRICE_UI_P_2).when(priceProviderUIP).getPriceAtLastBusinessDay(TestHelper.DAY_2);
+        Mockito.doReturn(TestHelper.PRICE_UI_P_3).when(priceProviderUIP).getPriceAtLastBusinessDay(TestHelper.DAY_3);
 
         wallet.addOperation(TestHelper.BUY_UI_ANE_1);
         wallet.addOperation(TestHelper.BUY_UI_P_1);
         wallet.addOperation(TestHelper.SELL_UI_ANE_3);
-        wallet.addOperation(TestHelper.SELL_UI_P_1);
+        wallet.addOperation(TestHelper.SELL_UI_P_3);
 
         wallet.performOperations();
 
         Mockito.verify(priceProviderUIANE, Mockito.times(2)).getPriceAtLastBusinessDay(Mockito.any(LocalDate.class));
-        Mockito.verify(priceProviderUIP, Mockito.times(1)).getPriceAtLastBusinessDay(Mockito.any(LocalDate.class));
+        Mockito.verify(priceProviderUIP, Mockito.times(2)).getPriceAtLastBusinessDay(Mockito.any(LocalDate.class));
 
         Assertions.assertThat(wallet.getRegister(FundName.UI_ANE).getOperations().size()).isEqualTo(2);
-        Assertions.assertThat(wallet.getRegister(FundName.UI_P).getOperations().size()).isEqualTo(1);
+        Assertions.assertThat(wallet.getRegister(FundName.UI_P).getOperations().size()).isEqualTo(2);
         Assertions.assertThat(wallet.getRegister(FundName.UI_ANE).getOperations().get(1).getTaxBase()).isEqualTo(TestHelper.SELL_UI_ANE_3_TAX_BASE);
         Assertions.assertThat(((Sell) wallet.getRegister(FundName.UI_ANE).getOperations().get(1)).getTaxValue()).isEqualTo(TestHelper.SELL_UI_ANE_3_TAX_VALUE);
 

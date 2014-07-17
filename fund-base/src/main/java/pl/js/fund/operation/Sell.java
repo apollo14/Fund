@@ -2,6 +2,7 @@ package pl.js.fund.operation;
 
 import java.math.BigDecimal;
 
+import pl.js.fund.constants.AppConstants;
 import pl.js.fund.model.Register;
 
 public class Sell extends Operation
@@ -21,7 +22,7 @@ public class Sell extends Operation
 
     public BigDecimal getTaxValue()
     {
-        return taxValue;
+        return taxValue.setScale(2, AppConstants.ROUNDING_MODE);
     }
 
     public String toString()

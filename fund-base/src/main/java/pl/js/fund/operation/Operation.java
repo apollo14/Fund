@@ -1,11 +1,11 @@
 package pl.js.fund.operation;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 import org.joda.time.LocalDate;
 
+import pl.js.fund.constants.AppConstants;
 import pl.js.fund.enums.FundName;
 import pl.js.fund.model.Register;
 
@@ -44,7 +44,7 @@ public abstract class Operation implements Comparable<Operation>
 
     public BigDecimal getValue()
     {
-        return value;
+        return value.setScale(2);
     }
 
     public void setValue(BigDecimal value)
@@ -54,12 +54,12 @@ public abstract class Operation implements Comparable<Operation>
 
     public BigDecimal getUnits()
     {
-        return units;
+        return units.setScale(fundName.getUnitsScale());
     }
 
     public BigDecimal getPrice()
     {
-        return price;
+        return price.setScale(2);
     }
 
     protected BigDecimal calculateTaxBase(Register register)
@@ -130,7 +130,7 @@ public abstract class Operation implements Comparable<Operation>
                 }
                 else
                 {
-                    BigDecimal factor = thisTaxUnits.divide(oTaxUnits, fundName.getUnitsScale(), RoundingMode.HALF_DOWN);
+                    BigDecimal factor = thisTaxUnits.divide(oTaxUnits, fundName.getUnitsScale(), AppConstants.ROUNDING_MODE);
                     this.taxBase = this.taxBase.add(oc.getTaxBaseInherited().multiply(factor));
                     oc.setTaxBaseInherited(oc.getTaxBaseInherited().add(oc.getTaxBaseInherited().multiply(factor).negate()));
                 }
@@ -142,19 +142,19 @@ public abstract class Operation implements Comparable<Operation>
     {
         this.price = register.getPriceProvider().getPriceAtLastBusinessDay(this.getDate());
 
-        this.units = this.getValue().abs().divide(price, fundName.getUnitsScale(), RoundingMode.HALF_DOWN);
+        this.units = this.getValue().abs().divide(price, fundName.getUnitsScale(), AppConstants.ROUNDING_MODE);
 
         this.taxUnits = this.units.multiply(new BigDecimal(1));
     }
 
     public BigDecimal getTaxBase()
     {
-        return taxBase;
+        return taxBase.setScale(2);
     }
 
     public BigDecimal getTaxUnits()
     {
-        return taxUnits;
+        return taxUnits.setScale(2);
     }
 
     public int compareTo(Operation o)
