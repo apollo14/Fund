@@ -20,7 +20,7 @@ public class WalletTest
         wallet = new Wallet();
     }
 
-    // @Test
+    @Test
     public void performOperations1()
     {
 
@@ -33,7 +33,7 @@ public class WalletTest
         Assert.assertEquals(1, wallet.getRegister(FundName.UI_P).getOperations().size());
     }
 
-    // @Test
+    @Test
     public void performOperations2()
     {
         wallet.loadOperations(this.getClass().getResource("/operacje2.txt").toString());

@@ -1,6 +1,7 @@
 package pl.js.fund.operation;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -94,20 +95,27 @@ public abstract class Operation implements Comparable<Operation>
 
     private void calculateTaxBase(Operation o)
     {
-        Double thisTaxUnits = this.taxUnits;
-        Double oTaxUnits = o.taxUnits;
+        BigDecimal thisTaxUnits = this.taxUnits;
+        BigDecimal oTaxUnits = o.taxUnits;
 
-        if (o.taxUnits < this.taxUnits)
+        BigDecimal income = BigDecimal.ZERO;
+        BigDecimal cost = BigDecimal.ZERO;
+
+        if (o.taxUnits.compareTo(this.taxUnits) == -1)
         {
-            this.taxBase = this.taxBase + (Math.round((o.taxUnits * this.price) * 100) / 100 - Math.round((o.taxUnits * o.price) * 100) / 100);
-            this.taxUnits = this.taxUnits - o.taxUnits;
-            o.taxUnits = 0.0;
+            income = o.taxUnits.multiply(this.price);
+            cost = o.taxUnits.multiply(o.price).negate();
+            this.taxBase = this.taxBase.add(income.add(cost));
+            this.taxUnits = this.taxUnits.add(o.taxUnits.negate());
+            o.taxUnits = BigDecimal.ZERO;
         }
         else
         {
-            this.taxBase = this.taxBase + (Math.round((this.taxUnits * this.price) * 100) / 100 - Math.round((this.taxUnits * o.price) * 100) / 100);
-            o.taxUnits = o.taxUnits - this.taxUnits;
-            this.taxUnits = 0.0;
+            income = this.taxUnits.multiply(this.price);
+            cost = this.taxUnits.multiply(o.price).negate();
+            this.taxBase = this.taxBase.add(income.add(cost));
+            o.taxUnits = o.taxUnits.add(this.taxUnits.negate());
+            this.taxUnits = BigDecimal.ZERO;
         }
 
         if (o instanceof Convert)
@@ -115,15 +123,16 @@ public abstract class Operation implements Comparable<Operation>
             Convert oc = (Convert) o;
             if (oc.getConnectedOperation() == null)
             {
-                if (oc.taxUnits < thisTaxUnits)
+                if (oc.taxUnits.compareTo(thisTaxUnits) == -1)
                 {
-                    this.taxBase = this.taxBase + oc.getTaxBaseInherited();
-                    oc.setTaxBaseInherited(0.0);
+                    this.taxBase = this.taxBase.add(oc.getTaxBaseInherited());
+                    oc.setTaxBaseInherited(BigDecimal.ZERO);
                 }
                 else
                 {
-                    this.taxBase = this.taxBase + (oc.getTaxBaseInherited() * thisTaxUnits / oTaxUnits);
-                    oc.setTaxBaseInherited(oc.getTaxBaseInherited() - oc.getTaxBaseInherited() * thisTaxUnits / oTaxUnits);
+                    BigDecimal factor = thisTaxUnits.divide(oTaxUnits, fundName.getUnitsScale(), RoundingMode.HALF_DOWN);
+                    this.taxBase = this.taxBase.add(oc.getTaxBaseInherited().multiply(factor));
+                    oc.setTaxBaseInherited(oc.getTaxBaseInherited().add(oc.getTaxBaseInherited().multiply(factor).negate()));
                 }
             }
         }
@@ -133,9 +142,7 @@ public abstract class Operation implements Comparable<Operation>
     {
         this.price = register.getPriceProvider().getPriceAtLastBusinessDay(this.getDate());
 
-        this.units = this.getValue().abs().divide(price);
-        // this.units = (double) Math.round(this.units * register.getFund().getUnitsRoundingFactor()) /
-        // register.getFund().getUnitsRoundingFactor();
+        this.units = this.getValue().abs().divide(price, fundName.getUnitsScale(), RoundingMode.HALF_DOWN);
 
         this.taxUnits = this.units.multiply(new BigDecimal(1));
     }

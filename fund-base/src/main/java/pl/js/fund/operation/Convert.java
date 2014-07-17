@@ -1,18 +1,20 @@
 package pl.js.fund.operation;
 
+import java.math.BigDecimal;
+
 import pl.js.fund.model.Register;
 
 public class Convert extends Operation
 {
 
-    private Convert connectedOperation;
-    private Double  taxBaseInherited;
+    private Convert    connectedOperation;
+    private BigDecimal taxBaseInherited;
 
     @Override
     public void perform(Register register)
     {
         super.perform(register);
-        register.setUnits(register.getUnits() + units);
+        register.setUnits(register.getUnits().add(units));
 
         if (connectedOperation != null)
         {
@@ -31,12 +33,12 @@ public class Convert extends Operation
         return connectedOperation;
     }
 
-    public Double getTaxBaseInherited()
+    public BigDecimal getTaxBaseInherited()
     {
         return taxBaseInherited;
     }
 
-    public void setTaxBaseInherited(Double taxBaseInherited)
+    public void setTaxBaseInherited(BigDecimal taxBaseInherited)
     {
         this.taxBaseInherited = taxBaseInherited;
     }

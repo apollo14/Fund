@@ -53,6 +53,11 @@ public enum FundName
         return umbrellaId;
     }
 
+    public int getUnitsScale()
+    {
+        return unitsScale;
+    }
+
     public static FundName parse(String fundName)
     {
         if (fundName != null && !"".equals(fundName))

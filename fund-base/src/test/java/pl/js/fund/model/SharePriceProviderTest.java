@@ -1,5 +1,7 @@
 package pl.js.fund.model;
 
+import java.math.BigDecimal;
+
 import junit.framework.Assert;
 
 import org.joda.time.LocalDate;
@@ -30,7 +32,7 @@ public class SharePriceProviderTest
 
         provider.setShare(share);
 
-        Double price = provider.getPriceAtLastBusinessDay(new LocalDate(2014, 04, 14));
+        BigDecimal price = provider.getPriceAtLastBusinessDay(new LocalDate(2014, 04, 14));
 
         Assert.assertNotNull(price);
 

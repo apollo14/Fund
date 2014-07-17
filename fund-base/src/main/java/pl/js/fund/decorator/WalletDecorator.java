@@ -17,7 +17,7 @@ public abstract class WalletDecorator implements IWallet
 
     public Register getRegister(String fundName)
     {
-        return wallet.getRegister(fundName);
+        return null;// wallet.getRegister(fundName);
     }
 
     public void loadOperations(String operationsUrl)

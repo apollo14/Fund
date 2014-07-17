@@ -8,7 +8,6 @@ import org.joda.time.LocalDate;
 import pl.js.fund.enums.FundName;
 import pl.js.fund.model.IWallet;
 import pl.js.fund.operation.Operation;
-import pl.js.fund.utils.DateUtils;
 
 public class NewTrendFirstDayConversion implements ISimulation
 {
@@ -40,18 +39,17 @@ public class NewTrendFirstDayConversion implements ISimulation
     public List<Operation> getOperations()
     {
         List<Operation> result = new ArrayList<Operation>();
-        LocalDate date = DateUtils.getLastBusinessDay(start);
-        LocalDate currentDate = DateUtils.getLastBusinessDay(new LocalDate());
-
-        while (currentDate.isAfter(date))
-        {
-            if (wallet.getRegister(safe.getName()).getPriceProvider().getPrice(date) != null)
-            {
-
-            }
-
-            date = date.plusDays(1);
-        }
+        /*
+         * LocalDate date = DateUtils.getLastBusinessDay(start);
+         * LocalDate currentDate = DateUtils.getLastBusinessDay(new LocalDate());
+         * while (currentDate.isAfter(date))
+         * {
+         * if (wallet.getRegister(safe.getName()).getPriceProvider().getPrice(date) != null)
+         * {
+         * }
+         * date = date.plusDays(1);
+         * }
+         */
 
         return result;
     }

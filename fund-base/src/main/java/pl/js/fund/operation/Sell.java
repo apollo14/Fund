@@ -1,23 +1,25 @@
 package pl.js.fund.operation;
 
+import java.math.BigDecimal;
+
 import pl.js.fund.model.Register;
 
 public class Sell extends Operation
 {
 
-    private Double taxValue = 0.0;
+    private BigDecimal taxValue = BigDecimal.ZERO;
 
     @Override
     public void perform(Register register)
     {
         super.perform(register);
-        register.setUnits(register.getUnits() - units);
+        register.setUnits(register.getUnits().add(units.negate()));
 
         taxValue = calculateTaxBase(register);
 
     }
 
-    public Double getTaxValue()
+    public BigDecimal getTaxValue()
     {
         return taxValue;
     }
