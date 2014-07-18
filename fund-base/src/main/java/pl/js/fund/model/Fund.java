@@ -4,8 +4,6 @@ import pl.js.fund.enums.FundName;
 
 public abstract class Fund extends Stock
 {
-    // number of places aftercoma in units values
-    protected Integer  unitsRoundingFactor;
     protected FundName fundName;
 
     protected Fund(String id, String name)
@@ -15,9 +13,7 @@ public abstract class Fund extends Stock
         this.fundName = FundName.parse(name);
     }
 
-    public Integer getUnitsRoundingFactor()
-    {
-        return unitsRoundingFactor;
+    public String toString(){
+    	return name;
     }
-
 }

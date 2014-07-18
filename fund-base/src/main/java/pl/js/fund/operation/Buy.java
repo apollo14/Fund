@@ -13,6 +13,12 @@ public class Buy extends Operation
 
     }
 
+    @Override
+    protected void calculateUnitsTotal(Register register)
+    {
+        this.unitsTotal = register.getUnits().add(units);
+    }
+
     public String toString()
     {
         return "B " + super.toString();

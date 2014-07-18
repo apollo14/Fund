@@ -77,7 +77,7 @@ public class TaxCalculationTest
 
         Assertions.assertThat(wallet.getRegister(FundName.UI_ANE).getOperations().size()).isEqualTo(2);
         Assertions.assertThat(wallet.getRegister(FundName.UI_P).getOperations().size()).isEqualTo(2);
-        Assertions.assertThat(wallet.getRegister(FundName.UI_ANE).getOperations().get(1).getTaxBase()).isEqualTo(TestHelper.SELL_UI_ANE_3_TAX_BASE);
+        Assertions.assertThat(wallet.getRegister(FundName.UI_ANE).getOperations().get(1).showTaxBase()).isEqualTo(TestHelper.SELL_UI_ANE_3_TAX_BASE);
         Assertions.assertThat(((Sell) wallet.getRegister(FundName.UI_ANE).getOperations().get(1)).getTaxValue()).isEqualTo(TestHelper.SELL_UI_ANE_3_TAX_VALUE);
 
     }

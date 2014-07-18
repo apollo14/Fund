@@ -98,4 +98,14 @@ public class Register
         }
 
     }
+    
+    private LocalDate getLastOperationDate(){
+    	return this.operations.get(operations.size()).getDate();
+    }
+    
+    @Override
+    public String toString(){
+    	return fund.toString() + ", units=" + units;// + ", value=" + getValue(getLastOperationDate());
+    }
+    
 }

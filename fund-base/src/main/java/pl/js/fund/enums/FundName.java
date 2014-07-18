@@ -17,25 +17,27 @@ public enum FundName
     UI_P("24", "UniKorona Pieniê¿ny", UnionInvestmentFund.class, UmbrellaId.UI, 6),
     UI_A("34", "UniKorona Akcje", UnionInvestmentFund.class, UmbrellaId.UI, 6),
     UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class, UmbrellaId.UI, 6),
+    UI_O("25", "UniKorona Obligacje", UnionInvestmentFund.class, UmbrellaId.UI, 6),
 
-    INV_GOTOWKOWY("qnXKPC", "Investor GotÃ³wkowy", InvestorFund.class, UmbrellaId.INV, 6),
-    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class, UmbrellaId.INV, 6),
-    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class, UmbrellaId.INV, 6);
+    INV_GOTOWKOWY("qnXKPC", "Investor Gotówkowy", InvestorFund.class, UmbrellaId.INV, 7),
+    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class, UmbrellaId.INV, 7),
+    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class, UmbrellaId.INV, 7);
 
-    private final static Logger   log = LoggerFactory.getLogger(Wallet.class);
+    private final static Logger   log                    = LoggerFactory.getLogger(Wallet.class);
     private String                id;
     private String                name;
     private UmbrellaId            umbrellaId;
-    private int                   unitsScale;
+    private int                   unitsCalculationScale;
+    private int                   unitsPresentationScale = 6;
     private Class<? extends Fund> classValue;
 
-    FundName(String id, String name, Class<? extends Fund> classValue, UmbrellaId umbrellaId, int unitsScale)
+    FundName(String id, String name, Class<? extends Fund> classValue, UmbrellaId umbrellaId, int scale)
     {
         this.id = id;
         this.name = name;
         this.classValue = classValue;
         this.umbrellaId = umbrellaId;
-        this.unitsScale = unitsScale;
+        this.unitsCalculationScale = scale;
     }
 
     public String getId()
@@ -53,9 +55,14 @@ public enum FundName
         return umbrellaId;
     }
 
-    public int getUnitsScale()
+    public int getUnitsCalculationScale()
     {
-        return unitsScale;
+        return unitsCalculationScale;
+    }
+
+    public int getUnitsPresentationScale()
+    {
+        return unitsPresentationScale;
     }
 
     public static FundName parse(String fundName)

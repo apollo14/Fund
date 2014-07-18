@@ -82,6 +82,9 @@ public class Wallet implements IWallet
             reader = new CSVReader(new InputStreamReader(new URL(operationsUrl).openStream()), ',', '\'', 0);
             while ((nextLine = reader.readNext()) != null)
             {
+            	if ("".equals(nextLine)){
+            		continue;
+            	}
                 FundName fundName = FundName.parse(nextLine[FundOperationsFileColumns.FUND_NAME.getId()]);
                 if (fundName == null)
                 {
@@ -132,8 +135,8 @@ public class Wallet implements IWallet
                     targetOperation.setDate(date);
                     targetOperation.setFundName(targetFundName);
                     targetOperation.setValue(value);
-                    ((Convert) operation).setConnectedOperation(targetOperation);
-                    // targetOperation.setConnectedOperation((Convert) operation);
+                    ((Convert) operation).setParrentOperation(targetOperation);
+                    targetOperation.setChildOperation((Convert) operation);
                     addOperation(targetOperation);
                 }
 

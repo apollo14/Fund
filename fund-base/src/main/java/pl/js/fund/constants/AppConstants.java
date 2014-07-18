@@ -4,6 +4,6 @@ import java.math.RoundingMode;
 
 public class AppConstants
 {
-    public static final RoundingMode ROUNDING_MODE = RoundingMode.HALF_DOWN;
+    public static final RoundingMode ROUNDING_MODE = RoundingMode.HALF_UP;
 
 }

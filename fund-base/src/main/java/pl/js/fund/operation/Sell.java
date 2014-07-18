@@ -25,8 +25,14 @@ public class Sell extends Operation
         return taxValue.setScale(2, AppConstants.ROUNDING_MODE);
     }
 
+    @Override
+    protected void calculateUnitsTotal(Register register)
+    {
+        this.unitsTotal = register.getUnits().add(units.negate()).setScale(fundName.getUnitsCalculationScale(), AppConstants.ROUNDING_MODE);
+    }
+
     public String toString()
     {
-        return "S " + super.toString() + ", tax=" + taxValue;
+        return "S " + super.toString() + ", taxBase=" + showTaxBase() + ", tax=" + getTaxValue();
     }
 }

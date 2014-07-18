@@ -14,13 +14,14 @@ public abstract class Operation implements Comparable<Operation>
     public static final String  DATE_FORMAT     = "dd-MM-yyyy";
     public static final Integer ROUNDING_FACTOR = 100000;
 
-    private FundName            fundName;
-    private LocalDate           date;
-    private BigDecimal          value;
+    protected FundName          fundName;
+    protected LocalDate         date;
+    protected BigDecimal        value;
     protected BigDecimal        units;
     protected BigDecimal        price;
     protected BigDecimal        taxBase         = BigDecimal.ZERO;
     protected BigDecimal        taxUnits        = BigDecimal.ZERO;
+    protected BigDecimal        unitsTotal      = BigDecimal.ZERO;
 
     public FundName getFundName()
     {
@@ -49,12 +50,7 @@ public abstract class Operation implements Comparable<Operation>
 
     public void setValue(BigDecimal value)
     {
-        this.value = value;
-    }
-
-    public BigDecimal getUnits()
-    {
-        return units.setScale(fundName.getUnitsScale());
+        this.value = value.setScale(2);
     }
 
     public BigDecimal getPrice()
@@ -100,41 +96,47 @@ public abstract class Operation implements Comparable<Operation>
 
         BigDecimal income = BigDecimal.ZERO;
         BigDecimal cost = BigDecimal.ZERO;
-
-        if (o.taxUnits.compareTo(this.taxUnits) == -1)
+        try
         {
-            income = o.taxUnits.multiply(this.price);
-            cost = o.taxUnits.multiply(o.price).negate();
-            this.taxBase = this.taxBase.add(income.add(cost));
-            this.taxUnits = this.taxUnits.add(o.taxUnits.negate());
-            o.taxUnits = BigDecimal.ZERO;
-        }
-        else
-        {
-            income = this.taxUnits.multiply(this.price);
-            cost = this.taxUnits.multiply(o.price).negate();
-            this.taxBase = this.taxBase.add(income.add(cost));
-            o.taxUnits = o.taxUnits.add(this.taxUnits.negate());
-            this.taxUnits = BigDecimal.ZERO;
-        }
-
-        if (o instanceof Convert)
-        {
-            Convert oc = (Convert) o;
-            if (oc.getConnectedOperation() == null)
+            if (o.taxUnits.compareTo(this.taxUnits) == -1)
             {
-                if (oc.taxUnits.compareTo(thisTaxUnits) == -1)
+                income = o.taxUnits.multiply(this.price);
+                cost = o.taxUnits.multiply(o.price).negate();
+                this.taxBase = this.taxBase.add(income.add(cost));
+                this.taxUnits = this.taxUnits.add(o.taxUnits.negate());
+                o.taxUnits = BigDecimal.ZERO;
+            }
+            else
+            {
+                income = this.taxUnits.multiply(this.price);
+                cost = this.taxUnits.multiply(o.price).negate();
+                this.taxBase = this.taxBase.add(income.add(cost));
+                o.taxUnits = o.taxUnits.add(this.taxUnits.negate());
+                this.taxUnits = BigDecimal.ZERO;
+            }
+
+            if (o instanceof Convert)
+            {
+                Convert oc = (Convert) o;
+                if (oc.getParrentOperation() == null)
                 {
-                    this.taxBase = this.taxBase.add(oc.getTaxBaseInherited());
-                    oc.setTaxBaseInherited(BigDecimal.ZERO);
-                }
-                else
-                {
-                    BigDecimal factor = thisTaxUnits.divide(oTaxUnits, fundName.getUnitsScale(), AppConstants.ROUNDING_MODE);
-                    this.taxBase = this.taxBase.add(oc.getTaxBaseInherited().multiply(factor));
-                    oc.setTaxBaseInherited(oc.getTaxBaseInherited().add(oc.getTaxBaseInherited().multiply(factor).negate()));
+                    if (oc.taxUnits.compareTo(thisTaxUnits) == -1)
+                    {
+                        this.taxBase = this.taxBase.add(oc.getTaxBaseInherited());
+                        oc.setTaxBaseInherited(BigDecimal.ZERO);
+                    }
+                    else
+                    {
+                        BigDecimal factor = thisTaxUnits.divide(oTaxUnits, fundName.getUnitsCalculationScale(), AppConstants.ROUNDING_MODE);
+                        this.taxBase = this.taxBase.add(oc.getTaxBaseInherited().multiply(factor));
+                        oc.setTaxBaseInherited(oc.getTaxBaseInherited().add(oc.getTaxBaseInherited().multiply(factor).negate()));
+                    }
                 }
             }
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException("Operation.calculateTaxBase() date=" + this.getDate() + ", value=" + this.value + " o(date=" + o.date + ", value=" + o.value + ")", e);
         }
     }
 
@@ -142,28 +144,37 @@ public abstract class Operation implements Comparable<Operation>
     {
         this.price = register.getPriceProvider().getPriceAtLastBusinessDay(this.getDate());
 
-        this.units = this.getValue().abs().divide(price, fundName.getUnitsScale(), AppConstants.ROUNDING_MODE);
+        this.units = this.getValue().abs().divide(price, fundName.getUnitsCalculationScale(), AppConstants.ROUNDING_MODE);
 
         this.taxUnits = this.units.multiply(new BigDecimal(1));
+
+        calculateUnitsTotal(register);
     }
 
-    public BigDecimal getTaxBase()
-    {
-        return taxBase.setScale(2);
-    }
-
-    public BigDecimal getTaxUnits()
-    {
-        return taxUnits.setScale(2);
-    }
+    protected abstract void calculateUnitsTotal(Register register);
 
     public int compareTo(Operation o)
     {
         return getDate().compareTo(o.getDate());
     }
 
+    public BigDecimal showUnits()
+    {
+        return units.setScale(fundName.getUnitsPresentationScale(), AppConstants.ROUNDING_MODE);
+    }
+
+    public BigDecimal showTaxBase()
+    {
+        return taxBase.setScale(2, AppConstants.ROUNDING_MODE);
+    }
+
+    public BigDecimal showUnitsTotal()
+    {
+        return unitsTotal.setScale(fundName.getUnitsPresentationScale(), AppConstants.ROUNDING_MODE);
+    }
+
     public String toString()
     {
-        return date.toString(DATE_FORMAT) + ", " + value.toString() + ", price=" + price.toString() + ", units=" + units.toString();
+        return date.toString(DATE_FORMAT) + ", " + fundName.getName() + ", " + getValue() + ", price=" + getPrice() + ", units=" + showUnits() + ", unitsTotal=" + showUnitsTotal();
     }
 }

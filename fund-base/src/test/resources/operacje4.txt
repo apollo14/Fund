@@ -1,80 +1,77 @@
-09-04-2014,Investor Turcja,1000.00
-08-04-2014,UniKorona Pieniê¿ny,3500.00
-08-04-2014,UniAkcje: Nowa Europa,-3500.00
-04-04-2014,Investor Turcja,232.09
-04-04-2014,Investor Rosja,-232.09
-04-04-2014,Investor Turcja,2000.00
-03-04-2014,UniKorona Pieniê¿ny,40000.00
-27-03-2014,UniAkcje: Nowa Europa,3000.00
-27-03-2014,UniKorona Pieniê¿ny,-3000.00
-27-03-2014,UniKorona Akcje,2000.00
-27-03-2014,UniKorona Pieniê¿ny,-2000.00
-02-01-2014,UniAkcje: Nowa Europa,3000.00
-02-01-2014,UniKorona Pieniê¿ny,-3000.00
-19-12-2013,UniKorona Pieniê¿ny,58000.00
-05-12-2013,UniAkcje: Nowa Europa,3000.00
-05-12-2013,UniKorona Pieniê¿ny,-3000.00
-22-11-2013,UniAkcje: Nowa Europa,1000.00
-22-11-2013,UniKorona Pieniê¿ny,-1000.00
-13-11-2013,UniAkcje: Nowa Europa,1000.00
-13-11-2013,UniKorona Pieniê¿ny,-1000.00
-07-11-2013,UniAkcje: Nowa Europa,1000.00
-07-11-2013,UniKorona Pieniê¿ny,-1000.00
-06-11-2013,UniKorona Pieniê¿ny,7000.00
-31-10-2013,UniAkcje: Nowa Europa,500.00
-31-10-2013,UniKorona Pieniê¿ny,-500.00
-31-10-2013,UniKorona Akcje,500.00
-31-10-2013,UniKorona Pieniê¿ny,-500.00
-30-10-2013,UniAkcje: Nowa Europa,500.00
-30-10-2013,UniKorona Pieniê¿ny,-500.00
-30-10-2013,UniKorona Akcje,500.00
-30-10-2013,UniKorona Pieniê¿ny,-500.00
-01-10-2013,UniKorona Pieniê¿ny,4957.89
-01-10-2013,UniObligacje: Nowa Europa,-4957.89
-01-10-2013,UniKorona Pieniê¿ny,9676.84
-01-10-2013,UniAkcje: Nowa Europa,-9676.84
-01-10-2013,UniKorona Pieniê¿ny,35000.00,148
-20-09-2013,UniObligacje: Nowa Europa,5000.00
-20-09-2013,UniKorona Pieniê¿ny,-5000.00
-20-09-2013,UniAkcje: Nowa Europa,10000.00
-20-09-2013,UniKorona Pieniê¿ny,-10000.00
-30-08-2013,Investor Turcja,-2496.37
-29-08-2013,UniKorona Pieniê¿ny,10000.00
-28-08-2013,UniKorona Pieniê¿ny,1500.00
-26-08-2013,UniKorona Pieniê¿ny,1000.00
-21-08-2013,ING Japonia L,-1479.41
-20-08-2013,Legg Mason Obligacji,-964.64
-21-06-2013,UniKorona Pieniê¿ny,106819.87
-21-06-2013,UniObligacje: Nowa Europa,-106819.87
-21-06-2013,UniKorona Pieniê¿ny,7095.10
-21-06-2013,UniAkcje: Nowa Europa,-7095.1
-18-06-2013,ING Japonia L,500.00
-17-06-2013,Investor Turcja,500.00
-17-06-2013,UniAkcje: Nowa Europa,5000.00
-17-06-2013,UniObligacje: Nowa Europa,-5000.00
-09-05-2013,UniObligacje: Nowa Europa,100000.00
-02-05-2013,ING Japonia L,500.00
-02-05-2013,UniObligacje: Nowa Europa,5500.00
-17-04-2013,ING Japonia L,500.00
-18-04-2013,UniObligacje: Nowa Europa,7000.00
-17-04-2013,UniObligacje: Nowa Europa,5000.00
-11-04-2013,Legg Mason Obligacji,1000.00
-11-04-2013,UniObligacje: Nowa Europa,1000.00
-11-02-2013,Investor Turcja,-3000.00
-11-02-2013,Investor Rosja,-400.00
-08-02-2013,UniAkcje: Nowa Europa,-1000.00
-28-01-2013,Investor Turcja,5000.00
-21-01-2013,Investor Turcja,1000.00
-04-01-2013,Investor Rosja,-800.00
-10-05-2012,UniAkcje: Nowa Europa,600.00
-09-05-2012,Investor Rosja,400.00
-15-04-2011,UniAkcje: Nowa Europa,500.00
-13-04-2011,UniAkcje: Nowa Europa,500.00
-31-03-2011,UniAkcje: Nowa Europa,600.00
-02-03-2011,ING Rosja EUR,-199.15
-11-02-2011,UniAkcje: Nowa Europa,200.00
-24-01-2011,UniAkcje: Nowa Europa,1000.00
-21-01-2011,Investor Rosja,1000.00
-18-01-2011,ING Rosja EUR,200.00
-17-01-2011,Investor Rosja,200.00
-17-01-2011,UniAkcje: Nowa Europa,200.00
+11-07-2014,UniKorona Akcje,KONWERSJA,724.64,UniAkcje: Nowa Europa
+01-07-2014,UniKorona Pieniê¿ny,NABYCIE,3 565.00
+24-06-2014,Investor Rosja,ODKUPIENIE,3633.83
+23-06-2014,UniObligacje: Nowa Europa,KONWERSJA,22000,UniKorona Pieniê¿ny
+23-06-2014,UniAkcje: Nowa Europa,KONWERSJA,5000,UniKorona Pieniê¿ny
+23-06-2014,UniKorona Akcje,KONWERSJA,5000,UniKorona Pieniê¿ny
+29-05-2014,Investor Turcja,KONWERSJA,3336.20,Investor Rosja
+29-05-2014,UniAkcje: Nowa Europa,KONWERSJA,6000.00,UniObligacje: Nowa Europa
+29-05-2014,UniKorona Akcje,KONWERSJA,7000.00,UniObligacje: Nowa Europa
+12-05-2014,Investor Gotówkowy,KONWERSJA,2504.96,Investor Turcja
+09-05-2014,UniKorona Pieniê¿ny,KONWERSJA,10000.00,UniObligacje: Nowa Europa
+22-04-2011,UniAkcje: Nowa Europa,NABYCIE,12000.00
+22-04-2014,UniKorona Pieniê¿ny,KONWERSJA,10000.00,UniAkcje: Nowa Europa
+16-04-2014,UniAkcje: Nowa Europa,KONWERSJA,2000,UniKorona Pieniê¿ny
+15-04-2014,Investor Turcja,KONWERSJA,2500,Investor Gotówkowy
+14-04-2014,UniAkcje: Nowa Europa,KONWERSJA,7000,UniKorona Pieniê¿ny
+14-04-2014,UniKorona Akcje,KONWERSJA,2500,UniKorona Pieniê¿ny
+09-04-2014,Investor Turcja,NABYCIE,1000.00
+08-04-2014,UniAkcje: Nowa Europa,KONWERSJA,3500.00,UniKorona Pieniê¿ny
+04-04-2014,Investor Rosja,KONWERSJA,232.09,Investor Turcja
+04-04-2014,Investor Turcja,NABYCIE,2000.00
+03-04-2014,UniKorona Pieniê¿ny,NABYCIE,40000.00
+27-03-2014,UniKorona Pieniê¿ny,KONWERSJA,3000.00,UniAkcje: Nowa Europa
+27-03-2014,UniKorona Pieniê¿ny,KONWERSJA,2000.00,UniKorona Akcje
+02-01-2014,UniKorona Pieniê¿ny,KONWERSJA,3000.00,UniAkcje: Nowa Europa
+19-12-2013,UniKorona Pieniê¿ny,NABYCIE,58000.00
+05-12-2013,UniKorona Pieniê¿ny,KONWERSJA,3000.00,UniAkcje: Nowa Europa
+22-11-2013,UniKorona Pieniê¿ny,KONWERSJA,1000.00,UniAkcje: Nowa Europa
+13-11-2013,UniKorona Pieniê¿ny,KONWERSJA,1000.00,UniAkcje: Nowa Europa
+07-11-2013,UniKorona Pieniê¿ny,KONWERSJA,1000.00,UniAkcje: Nowa Europa
+06-11-2013,UniKorona Pieniê¿ny,NABYCIE,7000.00
+31-10-2013,UniKorona Pieniê¿ny,KONWERSJA,500.00,UniAkcje: Nowa Europa
+31-10-2013,UniKorona Pieniê¿ny,KONWERSJA,500.00,UniKorona Akcje
+30-10-2013,UniKorona Pieniê¿ny,KONWERSJA,500.00,UniAkcje: Nowa Europa
+30-10-2013,UniKorona Pieniê¿ny,KONWERSJA,500.00,UniKorona Akcje
+01-10-2013,UniObligacje: Nowa Europa,KONWERSJA,4957.89,UniKorona Pieniê¿ny
+01-10-2013,UniAkcje: Nowa Europa,KONWERSJA,9676.84,UniKorona Pieniê¿ny
+01-10-2013,UniKorona Pieniê¿ny,NABYCIE,35000.00,148
+20-09-2013,UniKorona Pieniê¿ny,KONWERSJA,5000.00,UniAkcje: Nowa Europa
+20-09-2013,UniKorona Pieniê¿ny,KONWERSJA,10000.00,UniAkcje: Nowa Europa
+30-08-2013,Investor Turcja,ODKUPIENIE,2496.37
+29-08-2013,UniKorona Pieniê¿ny,NABYCIE,10000.00
+28-08-2013,UniKorona Pieniê¿ny,NABYCIE,1500.00
+26-08-2013,UniKorona Pieniê¿ny,NABYCIE,1000.00
+21-08-2013,ING Japonia L,ODKUPIENIE,1479.41
+20-08-2013,Legg Mason Obligacji,ODKUPIENIE,964.64
+21-06-2013,UniObligacje: Nowa Europa,KONWERSJA,106819.87,UniKorona Pieniê¿ny
+21-06-2013,UniAkcje: Nowa Europa,KONWERSJA,7095.1,UniKorona Pieniê¿ny
+18-06-2013,ING Japonia L,NABYCIE,500.00
+17-06-2013,Investor Turcja,NABYCIE,500.00
+17-06-2013,UniObligacje: Nowa Europa,KONWERSJA,5000.00,UniAkcje: Nowa Europa 
+09-05-2013,UniObligacje: Nowa Europa,NABYCIE,100000.00
+02-05-2013,ING Japonia L,NABYCIE,500.00
+02-05-2013,UniObligacje: Nowa Europa,NABYCIE,5500.00
+17-04-2013,ING Japonia L,NABYCIE,500.00
+18-04-2013,UniObligacje: Nowa Europa,NABYCIE,7000.00
+17-04-2013,UniObligacje: Nowa Europa,NABYCIE,5000.00
+11-04-2013,Legg Mason Obligacji,NABYCIE,1000.00
+11-04-2013,UniObligacje: Nowa Europa,NABYCIE,1000.00
+11-02-2013,Investor Turcja,ODKUPIENIE,3000.00
+11-02-2013,Investor Rosja,ODKUPIENIE,400.00
+08-02-2013,UniAkcje: Nowa Europa,ODKUPIENIE,1000.00
+28-01-2013,Investor Turcja,NABYCIE,5000.00
+21-01-2013,Investor Turcja,NABYCIE,1000.00
+04-01-2013,Investor Rosja,ODKUPIENIE,800.00
+10-05-2012,UniAkcje: Nowa Europa,NABYCIE,600.00
+09-05-2012,Investor Rosja,NABYCIE,400.00
+15-04-2011,UniAkcje: Nowa Europa,NABYCIE,500.00
+13-04-2011,UniAkcje: Nowa Europa,NABYCIE,500.00
+31-03-2011,UniAkcje: Nowa Europa,NABYCIE,600.00
+02-03-2011,ING Rosja EUR,ODKUPIENIE,199.15
+11-02-2011,UniAkcje: Nowa Europa,NABYCIE,200.00
+24-01-2011,UniAkcje: Nowa Europa,NABYCIE,1000.00
+21-01-2011,Investor Rosja,NABYCIE,1000.00
+18-01-2011,ING Rosja EUR,NABYCIE,200.00
+17-01-2011,Investor Rosja,NABYCIE,200.00
+17-01-2011,UniAkcje: Nowa Europa,NABYCIE,200.00
