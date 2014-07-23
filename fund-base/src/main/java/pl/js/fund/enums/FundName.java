@@ -19,9 +19,9 @@ public enum FundName
     UI_ONE("26", "UniObligacje: Nowa Europa", UnionInvestmentFund.class, UmbrellaId.UI, 6),
     UI_O("25", "UniKorona Obligacje", UnionInvestmentFund.class, UmbrellaId.UI, 6),
 
-    INV_GOTOWKOWY("qnXKPC", "Investor Gotówkowy", InvestorFund.class, UmbrellaId.INV, 7),
-    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class, UmbrellaId.INV, 7),
-    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class, UmbrellaId.INV, 7);
+    INV_GOTOWKOWY("S7smsq", "Investor Gotówkowy", InvestorFund.class, UmbrellaId.INV, 16),
+    INV_TURCJA("qnXKPC", "Investor Turcja", InvestorFund.class, UmbrellaId.INV, 16),
+    INV_ROSJA("fIeFUp", "Investor Rosja", InvestorFund.class, UmbrellaId.INV, 16);
 
     private final static Logger   log                    = LoggerFactory.getLogger(Wallet.class);
     private String                id;

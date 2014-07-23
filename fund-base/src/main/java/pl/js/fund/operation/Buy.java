@@ -5,6 +5,11 @@ import pl.js.fund.model.Register;
 public class Buy extends Operation
 {
 
+    public Buy()
+    {
+        this.sortingFactor = 1;
+    }
+
     @Override
     public void perform(Register register)
     {

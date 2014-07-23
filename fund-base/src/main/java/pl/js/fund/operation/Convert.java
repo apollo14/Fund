@@ -8,47 +8,48 @@ import pl.js.fund.model.Register;
 public class Convert extends Operation
 {
 
-    private Convert    parrentOperation;
-    private Convert    childOperation;
     private BigDecimal taxBaseInherited = BigDecimal.ZERO;
+
+    public Convert()
+    {
+        this.sortingFactor = 3;
+    }
 
     @Override
     public void perform(Register register)
     {
         super.perform(register);
-        register.setUnits(register.getUnits().add(units));
+        if (this.value.compareTo(BigDecimal.ZERO) == -1)
+        {
+            // KONWERSJA Z
+            register.setUnits(register.getUnits().add(units.negate()));
+        }
+        else
+        {
+            // KONWERSJA NA
+            register.setUnits(register.getUnits().add(units));
+        }
 
         if (parrentOperation != null)
         {
             calculateTaxBase(register);
-            parrentOperation.setTaxBaseInherited(this.taxBase);
+            ((Convert) parrentOperation).setTaxBaseInherited(this.taxBase);
         }
     }
 
     @Override
     protected void calculateUnitsTotal(Register register)
     {
-        this.unitsTotal = register.getUnits().add(units.negate()).setScale(fundName.getUnitsCalculationScale(), AppConstants.ROUNDING_MODE);
-    }
-
-    public Convert getParrentOperation()
-    {
-        return parrentOperation;
-    }
-
-    public void setParrentOperation(Convert parrentOperation)
-    {
-        this.parrentOperation = parrentOperation;
-    }
-
-    public Convert getChildOperation()
-    {
-        return childOperation;
-    }
-
-    public void setChildOperation(Convert childOperation)
-    {
-        this.childOperation = childOperation;
+        if (this.value.compareTo(BigDecimal.ZERO) == -1)
+        {
+            // KONWERSJA Z
+            this.unitsTotal = register.getUnits().add(units.negate()).setScale(fundName.getUnitsCalculationScale(), AppConstants.ROUNDING_MODE);
+        }
+        else
+        {
+            // KONWERSJA NA
+            this.unitsTotal = register.getUnits().add(units).setScale(fundName.getUnitsCalculationScale(), AppConstants.ROUNDING_MODE);
+        }
     }
 
     public BigDecimal getTaxBaseInherited()

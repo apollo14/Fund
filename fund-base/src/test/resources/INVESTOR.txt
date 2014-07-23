@@ -1,0 +1,17 @@
+24-06-2014,Investor Rosja,ODKUPIENIE,3633.83
+29-05-2014,Investor Turcja,KONWERSJA,3336.20,Investor Rosja
+12-05-2014,Investor Gotówkowy,KONWERSJA,2504.96,Investor Turcja
+15-04-2014,Investor Turcja,KONWERSJA,2500,Investor Gotówkowy
+09-04-2014,Investor Turcja,NABYCIE,1000.00
+04-04-2014,Investor Rosja,KONWERSJA,232.09,Investor Turcja
+04-04-2014,Investor Turcja,NABYCIE,2000.00
+30-08-2013,Investor Turcja,ODKUPIENIE,2496.37
+17-06-2013,Investor Turcja,NABYCIE,500.00
+11-02-2013,Investor Turcja,ODKUPIENIE,3000.00
+11-02-2013,Investor Rosja,ODKUPIENIE,400.00
+28-01-2013,Investor Turcja,NABYCIE,5000.00
+21-01-2013,Investor Turcja,NABYCIE,1000.00
+04-01-2013,Investor Rosja,ODKUPIENIE,800.00
+09-05-2012,Investor Rosja,NABYCIE,400.00
+21-01-2011,Investor Rosja,NABYCIE,1000.00
+17-01-2011,Investor Rosja,NABYCIE,200.00

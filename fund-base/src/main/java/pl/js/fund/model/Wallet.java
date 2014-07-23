@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,6 +19,7 @@ import pl.js.fund.enums.UmbrellaId;
 import pl.js.fund.operation.Buy;
 import pl.js.fund.operation.Convert;
 import pl.js.fund.operation.Operation;
+import pl.js.fund.operation.OperationProcessingComparator;
 import pl.js.fund.operation.Sell;
 import pl.js.fund.simulation.ISimulation;
 import pl.js.fund.utils.DateUtils;
@@ -82,9 +84,10 @@ public class Wallet implements IWallet
             reader = new CSVReader(new InputStreamReader(new URL(operationsUrl).openStream()), ',', '\'', 0);
             while ((nextLine = reader.readNext()) != null)
             {
-            	if ("".equals(nextLine)){
-            		continue;
-            	}
+                if ("".equals(nextLine))
+                {
+                    continue;
+                }
                 FundName fundName = FundName.parse(nextLine[FundOperationsFileColumns.FUND_NAME.getId()]);
                 if (fundName == null)
                 {
@@ -134,9 +137,9 @@ public class Wallet implements IWallet
                     Convert targetOperation = new Convert();
                     targetOperation.setDate(date);
                     targetOperation.setFundName(targetFundName);
-                    targetOperation.setValue(value);
-                    ((Convert) operation).setParrentOperation(targetOperation);
-                    targetOperation.setChildOperation((Convert) operation);
+                    // targetOperation.setValue(value);
+                    operation.setParrentOperation(targetOperation);
+                    targetOperation.setChildOperation(operation);
                     addOperation(targetOperation);
                 }
 
@@ -174,18 +177,23 @@ public class Wallet implements IWallet
 
     public void performOperations()
     {
-        for (FundName fundName : this.registers.keySet())
+        for (UmbrellaId ui : umbrellas.keySet())
         {
-            this.getRegister(fundName).performOperations();
+            Collections.sort(umbrellas.get(ui).getOperations(), new OperationProcessingComparator());
+            for (Operation o : umbrellas.get(ui).getOperations())
+            {
+                o.perform(getRegister(o.getFundName()));
+            }
         }
     }
 
     public void performOperations(ISimulation simulation)
     {
-        for (FundName fundName : this.registers.keySet())
+        for (Operation o : simulation.getOperations())
         {
-            this.getRegister(fundName).performOperations(simulation.getOperations());
+            this.addOperation(o);
         }
+        performOperations();
     }
 
 }

@@ -10,6 +10,11 @@ public class Sell extends Operation
 
     private BigDecimal taxValue = BigDecimal.ZERO;
 
+    public Sell()
+    {
+        this.sortingFactor = 2;
+    }
+
     @Override
     public void perform(Register register)
     {

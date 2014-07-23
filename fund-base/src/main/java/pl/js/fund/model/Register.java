@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
+import pl.js.fund.constants.AppConstants;
 import pl.js.fund.operation.Operation;
 import pl.js.fund.price.FundPriceProvider;
 
@@ -98,14 +99,16 @@ public class Register
         }
 
     }
-    
-    private LocalDate getLastOperationDate(){
-    	return this.operations.get(operations.size()).getDate();
+
+    private BigDecimal showUnits()
+    {
+        return this.units.setScale(fund.fundName.getUnitsPresentationScale(), AppConstants.ROUNDING_MODE);
     }
-    
+
     @Override
-    public String toString(){
-    	return fund.toString() + ", units=" + units;// + ", value=" + getValue(getLastOperationDate());
+    public String toString()
+    {
+        return fund.toString() + ", units=" + showUnits();// + ", value=" + getValue(getLastOperationDate());
     }
-    
+
 }
