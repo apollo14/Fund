@@ -30,15 +30,15 @@ public class SimulationTest
     
     @BeforeClass
     public static void setUpOnce(){
-    	//start = new LocalDate(2014, 01, 01);
-    	//end = new LocalDate(2014, 8, 25);
+    	start = new LocalDate(2014, 01, 01);
+    	end = new LocalDate(2014, 8, 25);
     	//start = new LocalDate(2013, 01, 01);
     	//end = new LocalDate(2013, 12, 31);
-    	start = new LocalDate(2012, 01, 01);
-    	end = new LocalDate(2012, 12, 31);
+    	//start = new LocalDate(2012, 01, 01);
+    	//end = new LocalDate(2012, 12, 31);
 
 
-    	funds = new FundName[]{FundName.UI_A, FundName.UI_ANE};
+    	funds = new FundName[]{FundName.UI_A, FundName.UI_ANE, FundName.UI_ONE};
         System.out.println("Start date:" + start);
         System.out.println("End date:" + end);    	
     }
