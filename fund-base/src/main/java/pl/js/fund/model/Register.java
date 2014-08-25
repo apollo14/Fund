@@ -75,7 +75,7 @@ public class Register
     public void addOperation(Operation operation)
     {
         this.operations.add(operation);
-        Collections.sort(this.operations);
+        //Collections.sort(this.operations);
     }
 
     public List<Operation> getOperations()

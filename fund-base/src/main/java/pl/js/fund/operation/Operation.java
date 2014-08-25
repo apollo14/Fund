@@ -14,17 +14,28 @@ public abstract class Operation implements Comparable<Operation>
     public static final String  DATE_FORMAT     = "dd-MM-yyyy";
     public static final Integer ROUNDING_FACTOR = 100000;
 
+    // fundusz
     protected FundName          fundName;
+    // data operacji
     protected LocalDate         date;
+    // wartoœæ operacji
     protected BigDecimal        value           = BigDecimal.ZERO;
+    // sprzeda¿/konwersja wszystkich jednostek
     private boolean             allUnits        = false;
+    //iloœæ jednostek udzia³owych
     protected BigDecimal        units           = BigDecimal.ZERO;
+    // cena
     protected BigDecimal        price           = BigDecimal.ZERO;
+    // podstawa podatku dla danej operacji zysk/strata
     protected BigDecimal        taxBase         = BigDecimal.ZERO;
+    // jednostki pozosta³e do opodatkowania w danej operacji
     protected BigDecimal        taxUnits        = BigDecimal.ZERO;
+    // suma jednostkek na rejestrze 
     protected BigDecimal        unitsTotal      = BigDecimal.ZERO;
 
+    // operacja docelowa
     protected Operation         parrentOperation;
+    // operacja Ÿrod³owa
     protected Operation         childOperation;
 
     protected Integer           sortingFactor;
@@ -76,21 +87,21 @@ public abstract class Operation implements Comparable<Operation>
 
     protected BigDecimal calculateTaxBase(Register register)
     {
-        // w ramach funduszu - kompensacja pionowa
+        // w ramach funduszu - kompensacja pionowa - bilans zarobku/straty tylko w ramach danego funduszu
         List<Operation> operations = register.getOperations().subList(0, register.getOperations().size());
-        // w ramach parasola - kompensacja pozioma
+        // w ramach parasola - kompensacja pozioma - bilans zarobku/straty w ramach parasola
         // List<Operation> operations = register.getUmbrella().getOperations().subList(0,
         // register.getUmbrella().getOperations().size());
         for (Operation o : operations)
         {
             if ((o instanceof Buy) && o.taxUnits.compareTo(BigDecimal.ZERO) == 1)
             {
+            	// o.taxUnits > 0
                 calculateTaxBase(o);
             }
-            if ((o instanceof Convert) && o.taxUnits.compareTo(BigDecimal.ZERO) == 1)// && ((Convert)
-                                                                                     // o).getConnectedOperation() !=
-                                                                                     // null)
+            if ((o instanceof Convert) && o.taxUnits.compareTo(BigDecimal.ZERO) == 1)
             {
+            	// o.taxUnits > 0
                 calculateTaxBase(o);
             }
             if (this.taxUnits == BigDecimal.ZERO)
@@ -98,9 +109,10 @@ public abstract class Operation implements Comparable<Operation>
                 break;
             }
         }
-        if (taxBase.compareTo(BigDecimal.ZERO) == 1)
+        if (this.taxBase.compareTo(BigDecimal.ZERO) == 1)
         {
-            return taxBase.multiply(new BigDecimal(0.19));
+        	// this.taxBase > 0
+            return this.taxBase.multiply(new BigDecimal(0.19));
         }
         return BigDecimal.ZERO;
     }
@@ -116,6 +128,7 @@ public abstract class Operation implements Comparable<Operation>
         {
             if (o.taxUnits.compareTo(this.taxUnits) == -1)
             {
+            	//o.taxUnits < this.taxUnits
                 income = o.taxUnits.multiply(this.price);
                 cost = o.taxUnits.multiply(o.price).negate();
                 this.taxBase = this.taxBase.add(income.add(cost));
@@ -214,7 +227,7 @@ public abstract class Operation implements Comparable<Operation>
 
     protected abstract void calculateUnitsTotal(Register register);
 
-    public int compareTo(Operation o)
+   public int compareTo(Operation o)
     {
         int result = 0;
         // Data
@@ -222,6 +235,14 @@ public abstract class Operation implements Comparable<Operation>
         if (result != 0)
         {
             return result;
+        }
+        // Value for Convert operations
+        if (this instanceof Convert && o instanceof Convert){
+	        result = getValue().compareTo(o.getValue());
+	        if (result != 0)
+	        {
+	            return result;
+	        }
         }
 
         // Typ operacji (BUY, SELL, CONVERT)

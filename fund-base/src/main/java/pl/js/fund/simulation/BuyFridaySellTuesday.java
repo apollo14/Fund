@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
 import pl.js.fund.enums.FundName;
@@ -12,20 +15,22 @@ import pl.js.fund.operation.Buy;
 import pl.js.fund.operation.Operation;
 import pl.js.fund.operation.Sell;
 
-public class BuyFridaySellTuesday implements ISimulation
+public class BuyFridaySellTuesday extends ASimulation
 {
-    public static String   DATE_FORMAT = "yyyy-MM-dd";
-    private LocalDate      start;
-    private LocalDate      end;
-    private List<FundName> funds;
-    List<Operation>        operations;
     Integer                buyDay;
     Integer                sellDay;
 
     public BuyFridaySellTuesday()
     {
+        //setBuyDay(DateTimeConstants.MONDAY);
+        // setBuyDay(DateTimeConstants.THURSDAY);
+         setBuyDay(DateTimeConstants.FRIDAY);
+        // setSellDay(DateTimeConstants.MONDAY);
+         setSellDay(DateTimeConstants.TUESDAY);
+        //setSellDay(DateTimeConstants.WEDNESDAY);
+
         funds = new ArrayList<FundName>();
-        operations = new ArrayList<Operation>();
+        operations = new TreeMap<FundName, List<Operation>>();
         end = new LocalDate(new Date().getTime());
         if (start == null)
         {
@@ -33,20 +38,6 @@ public class BuyFridaySellTuesday implements ISimulation
         }
     }
 
-    public void addFund(FundName fundName)
-    {
-        this.funds.add(fundName);
-    }
-
-    public void setStart(LocalDate start)
-    {
-        this.start = start;
-    }
-
-    public void setEnd(LocalDate end)
-    {
-        this.end = end;
-    }
 
     public void setBuyDay(Integer buyDay)
     {
@@ -58,7 +49,7 @@ public class BuyFridaySellTuesday implements ISimulation
         this.sellDay = sellDay;
     }
 
-    public List<Operation> getOperations()
+    public Map<FundName, List<Operation>> getOperations()
     {
         if (operations.size() == 0)
         {
@@ -75,7 +66,10 @@ public class BuyFridaySellTuesday implements ISimulation
                         buy.setDate(currentDate);
                         buy.setFundName(fundName);
                         buy.setValue(new BigDecimal(1000.00));
-                        operations.add(buy);
+                        if (!operations.containsKey(fundName)){
+                        	operations.put(fundName, new ArrayList<Operation>());
+                        }
+                        operations.get(fundName).add(buy);
                     }
                 }
                 else if (pDoW.get() == sellDay && operations.size() > 0)
@@ -86,7 +80,9 @@ public class BuyFridaySellTuesday implements ISimulation
                         sell.setDate(currentDate);
                         sell.setFundName(fundName);
                         sell.setAllUnits();
-                        operations.add(sell);
+                        if (operations.containsKey(fundName)){
+                        	operations.get(fundName).add(sell);
+                        }
                     }
 
                 }
@@ -97,18 +93,4 @@ public class BuyFridaySellTuesday implements ISimulation
         return operations;
     }
 
-    public BigDecimal getBalance()
-    {
-        BigDecimal result = BigDecimal.ZERO;
-
-        for (Operation o : operations)
-        {
-            if (o instanceof Sell)
-            {
-                result = result.add(o.getValue().add(new BigDecimal(1000).negate()));
-            }
-        }
-
-        return result;
-    }
 }

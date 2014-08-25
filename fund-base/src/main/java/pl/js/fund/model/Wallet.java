@@ -19,7 +19,6 @@ import pl.js.fund.enums.UmbrellaId;
 import pl.js.fund.operation.Buy;
 import pl.js.fund.operation.Convert;
 import pl.js.fund.operation.Operation;
-import pl.js.fund.operation.OperationProcessingComparator;
 import pl.js.fund.operation.Sell;
 import pl.js.fund.simulation.ISimulation;
 import pl.js.fund.utils.DateUtils;
@@ -177,22 +176,40 @@ public class Wallet implements IWallet
 
     public void performOperations()
     {
+    	//registers.keySet().parallelStream().forEach(r ->{
+    		//Collections.sort(registers.get(r).getOperations());
+    	//});
+    	
         for (UmbrellaId ui : umbrellas.keySet())
         {
-            Collections.sort(umbrellas.get(ui).getOperations(), new OperationProcessingComparator());
+            Collections.sort(umbrellas.get(ui).getOperations());
             for (Operation o : umbrellas.get(ui).getOperations())
             {
                 o.perform(getRegister(o.getFundName()));
             }
         }
+        //umbrellas.keySet().parallelStream().forEach(u->{
+        	//Collections.sort(umbrellas.get(u).getOperations());
+        	//umbrellas.get(u).getOperations().stream().forEach(o->{
+//        		o.perform(getRegister(o.getFundName()));
+        	//});
+        //});
     }
 
     public void performOperations(ISimulation simulation)
     {
-        for (Operation o : simulation.getOperations())
-        {
-            this.addOperation(o);
-        }
+    	/*for(FundName fn: simulation.getOperations().keySet()){
+	        for (Operation o : simulation.getOperations().get(fn))
+	        {
+	           this.addOperation(o);
+	        }
+    	}*/
+        
+        simulation.getOperations().keySet().stream().forEach(fn ->{
+        	simulation.getOperations().get(fn).stream().forEach(o->{
+        		this.addOperation(o);	
+        	});        	
+        });
         performOperations();
     }
 

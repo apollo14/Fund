@@ -1,3 +1,12 @@
+22-08-2014,UniKorona Pieniê¿ny,KONWERSJA,1000,UniAkcje: Nowa Europa
+21-08-2014,UniKorona Pieniê¿ny,KONWERSJA,1000,UniAkcje: Nowa Europa
+21-08-2014,UniKorona Pieniê¿ny,KONWERSJA,2000,UniObligacje: Nowa Europa
+20-08-2014,UniKorona Pieniê¿ny,KONWERSJA,1000,UniAkcje: Nowa Europa
+20-08-2014,UniKorona Pieniê¿ny,KONWERSJA,2000,UniObligacje: Nowa Europa
+19-08-2014,UniKorona Pieniê¿ny,KONWERSJA,1000,UniAkcje: Nowa Europa
+19-08-2014,UniKorona Pieniê¿ny,KONWERSJA,2000,UniObligacje: Nowa Europa
+07-08-2014,UniObligacje: Nowa Europa,KONWERSJA,1000,UniAkcje: Nowa Europa
+01-08-2014,UniAkcje: Nowa Europa,KONWERSJA,894,51,UniObligacje: Nowa Europa
 11-07-2014,UniKorona Akcje,KONWERSJA,724.64,UniAkcje: Nowa Europa
 01-07-2014,UniKorona Pieniê¿ny,NABYCIE,3 565.00
 24-06-2014,Investor Rosja,ODKUPIENIE,3633.83
